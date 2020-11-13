@@ -1,8 +1,10 @@
+%% Goal of Script
+
+%% Clear all
 clear all; 
 clc; 
 
 %% Open the main screen 
-
 Screen('Preference','ConserveVRAM',64); 
 Screen('Preference', 'SkipSyncTests', 1); 
 [onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
@@ -10,13 +12,9 @@ Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on th
 
 %% Define Variables 
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
-
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 
-
 NumTrials = 50; % number of trials  
-
 dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles folder, where there will be two other folders (1) Armed Files (2) Unarmed Files 
-
 InstructTrial = ‘You will see two images appear. Press the F key if the cue points to a weapon. Press the J key if the cue does not point towards a weapon.’;  
 % the “f” key is key number 70 
 % the “j” key is key number 74 
@@ -43,11 +41,12 @@ im = imread(''); %read image
 
 DrawFormattedText(onScreen, instructTrial, [centerX],[centerY],[40 115 80]); 
 Screen('Flip', onScreen); 
-pause (2); 
+
 % store text string in D struct 
+
 % clear text string
 
-pause (2)
+pause (2);
 
 % run trials 
 for i=1: NumTrials 

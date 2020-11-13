@@ -30,6 +30,9 @@ D.correct =
 D.trialNumber = 
 
 % load images (at least 2 folders) 
+imListWeapon = dir(’WeaponImages/*.jpg’); 
+imListNoWeapon = dir(’NoWeaponImages/*.jpg’); 
+
 % counterbalance conditions and randomize trial order 
 % Text string telling subjects instructions  
 

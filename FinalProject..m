@@ -53,10 +53,19 @@ pause (2)
 for i=1: NumTrials 
   % show current images (one with gun, one without) 
   imagesc(im);
+  % establish a method for determining whether the weapon was on the left or right
   % wait for a response (keyboard input) 
-  while  
-  % check to see if response is correct 
-  % record the data in the D struct  
+  [keyIsDown,keyTime,keyCode] = KbCheck; 
+  if keyIsDown==1;
+    whichKeys = find(keyCode==1);
+    if keycode == 70 &  % label for weapon is left
+    % save correct to struct
+    if keycode == 70 &  % label for weapon is right
+    % save wrong to struct
+    if keycode == 74 &  % label for weapon is right
+    % save correct to struct
+    if keycode == 74 &  % label for weapon is left
+    % save wrong to struct
   end
   
 end 

@@ -13,7 +13,7 @@ centerX = screenRect(3)/2; % center ‘X’ coordinate
 
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 
 
-NumTrials = 50; 
+NumTrials = 50; % number of trials  
 
 dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles folder, where there will be two other folders (1) Armed Files (2) Unarmed Files 
 

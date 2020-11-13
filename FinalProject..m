@@ -23,8 +23,11 @@ armedStimuli = dir(‘./ExperimentFiles/ArmedFiles/*.jpg’);
 unarmedStimuli = dir(‘./ExperimentFiles/UnarmedFiles/*.jpg’);  
 
 %% D struct variables 
-D.subNum =
+D.time =
 D.subID =
+D.race = 
+D.correct = 
+D.trialNumber = 
 
 % load images (at least 2 folders) 
 % counterbalance conditions and randomize trial order 

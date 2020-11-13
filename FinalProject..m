@@ -35,6 +35,8 @@ D.trialNumber =
 % load images (4 folders: blackArmed, whiteArmed, blackUnarmed, whiteUnarmed) 
 imListWeapon = dir(’WeaponImages/*.jpg’); 
 imListNoWeapon = dir(’NoWeaponImages/*.jpg’); 
+imName = fullfile('ImageFiles', imLT(x).name);
+im = imread(''); %read image
 
 % counterbalance conditions and randomize trial order 
 % Text string telling subjects instructions  
@@ -43,16 +45,20 @@ DrawFormattedText(onScreen, instructTrial, [centerX],[centerY],[40 115 80]);
 Screen('Flip', onScreen); 
 pause (2); 
 % store text string in D struct 
-% clear text string, pause 2 seconds, and then start the experiment
+% clear text string
+
+pause (2)
 
 % run trials 
 for i=1: NumTrials 
   % show current images (one with gun, one without) 
+  imagesc(im);
   % wait for a response (keyboard input) 
   while  
   % check to see if response is correct 
   % record the data in the D struct  
   end
+  
 end 
 
 % Pause 1 second

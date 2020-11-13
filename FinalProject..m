@@ -7,6 +7,7 @@ Screen('Preference','ConserveVRAM',64);
 Screen('Preference', 'SkipSyncTests', 1); 
 [onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
 Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on the offscreen buffer) 
+
 %% Define Variables 
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
 
@@ -51,6 +52,9 @@ for i=1: NumTrials
   % record the data in the D struct  
   end
 end 
+
+% Pause 1 second
+pause (1)
 
 % close main screen 
 Screen('CloseAll'); 

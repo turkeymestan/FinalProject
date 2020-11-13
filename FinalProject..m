@@ -20,8 +20,10 @@ dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles fo
 InstructTrial = ‘You will see two images appear. Press the F key if the cue points to a weapon. Press the J key if the cue does not point towards a weapon.’;  
 % the “f” key is key number 70 
 % the “j” key is key number 74 
-armedStimuli = dir(‘./ExperimentFiles/ArmedFiles/*.jpg’); 
-unarmedStimuli = dir(‘./ExperimentFiles/UnarmedFiles/*.jpg’);  
+blackArmed = dir(‘./ExperimentFiles/blackArmed/*.jpg’); 
+whiteArmed = dir(‘./ExperimentFiles/whiteArmed/*.jpg’);  
+blackUnarmed = dir(‘./ExperimentFiles/blackUnarmed/*.jpg’);  
+whiteUnarmed = dir(‘./ExperimentFiles/whiteUnarmed/*.jpg’); 
 
 %% D struct variables 
 D.time =
@@ -30,7 +32,7 @@ D.race =
 D.correct = 
 D.trialNumber = 
 
-% load images (at least 2 folders) 
+% load images (4 folders: blackArmed, whiteArmed, blackUnarmed, whiteUnarmed) 
 imListWeapon = dir(’WeaponImages/*.jpg’); 
 imListNoWeapon = dir(’NoWeaponImages/*.jpg’); 
 

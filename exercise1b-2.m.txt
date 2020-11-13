@@ -1,0 +1,27 @@
+% Noah Cingilli
+% Exercise 1B
+% screenRect returns values [0, 0, 3502, 1904] 
+% therefore center ex = (3840/2, 2160/2)= 1920, 1080
+%% Always define variables early, then use those variables in code
+
+Screen('Preference', 'ConserveVRAM', 64);
+Screen('Preference','SkipSyncTests',1)
+[onScreen, screenRect] = Screen('OpenWindow',0);
+Screen('BlendFunction', onScreen, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+%^^ necessary for DrawDots to work right
+Screen('FillRect', onScreen, [255 255 255]);
+
+
+[minSmoothPointSize, maxSmoothPointSize, minAliasedPointSize, maxAliasedPointSize] = Screen('DrawDots',onScreen,[0 0],(500),[40 185 200],[2450 1080],(0),(1));
+circle.radius = 500;
+circle.color = [79 201 168]; %this is a pretty color
+
+circle.sizeRect = [0 0 circle.radius circle.radius];
+circle.drawRect = [1920-circle.radius 1080-circle.radius 1920+circle.radius 1080+circle.radius];
+circle.drawRect = CenterRectOnPoint(circle.sizeRect,1920,1080);
+Screen('FillOval', onScreen,[circle.color],[circle.drawRect],[]);
+
+
+Screen('Flip', onScreen); 
+pause(2);
+Screen('CloseAll'); 

@@ -61,11 +61,11 @@ for i=1: NumTrials
     if keycode == 70 &  % label for weapon is left
     % save correct to struct
     if keycode == 70 &  % label for weapon is right
-    % save wrong to struct
+    % save incorrect to struct
     if keycode == 74 &  % label for weapon is right
     % save correct to struct
     if keycode == 74 &  % label for weapon is left
-    % save wrong to struct
+    % save incorrect to struct
     end
   end
   

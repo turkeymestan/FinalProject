@@ -1,5 +1,4 @@
 clear all; 
-
 clc; 
 
 %% Open the main screen 

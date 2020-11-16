@@ -11,17 +11,37 @@ Screen('Preference', 'SkipSyncTests', 1);
 Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on the offscreen buffer) 
 
 %% Define Variables 
-centerX = screenRect(3)/2; % center ‘X’ coordinate 
-centerY = screenRect(4)/2; % center ‘Y’ coordinate 
+
 NumTrials = 50; % number of trials  
-dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles folder, where there will be two other folders (1) Armed Files (2) Unarmed Files 
-InstructTrial = ‘You will see two images appear. Press the F key if the cue points to a weapon. Press the J key if the cue does not point towards a weapon.’;  
+
+dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles folder, where there will be two other folders (1) Armed Files (2) Unarmed Files  
+
 % the “f” key is key number 70 
 % the “j” key is key number 74 
 blackArmed = dir(‘./ExperimentFiles/blackArmed/*.jpg’); 
 whiteArmed = dir(‘./ExperimentFiles/whiteArmed/*.jpg’);  
 blackUnarmed = dir(‘./ExperimentFiles/blackUnarmed/*.jpg’);  
 whiteUnarmed = dir(‘./ExperimentFiles/whiteUnarmed/*.jpg’); 
+
+centerX = screenRect(3)/2; % center ‘X’ coordinate 
+
+centerY = screenRect(4)/2; % center ‘Y’ coordinate 
+
+destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
+
+destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
+
+textColor = [255 0 0];
+
+InstructTrial = ‘You will see two images appear. Press the F key if the cue points to a weapon. Press the J key if the cue does not point towards a weapon.’; 
+Screen('TextSize', onScreen ,[50]);
+DrawFormattedText(onScreen, InstructTrial,[centerX],[centerY],[textColor]);
+Screen('Flip', onScreen);
+
+while ~KbCheck() end % wait for a keypress
+
+
+
 
 %% D struct variables 
 D.time =
@@ -31,6 +51,7 @@ D.correct =
 D.trialNumber = 
 
 % load images (4 folders: blackArmed, whiteArmed, blackUnarmed, whiteUnarmed) 
+% basically going to be using Lab 7 exercise 1B, but this time have two different parameters for imList? (how do you get it to draw from two different folders simultaneously?)
 imListWeapon = dir(’WeaponImages/*.jpg’); 
 imListNoWeapon = dir(’NoWeaponImages/*.jpg’); 
 imName = fullfile('ImageFiles', imLT(x).name);

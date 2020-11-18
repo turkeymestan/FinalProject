@@ -18,10 +18,9 @@ dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles fo
 
 % the “f” key is key number 70 
 % the “j” key is key number 74 
-blackArmed = dir(‘./ExperimentFiles/blackArmed/*.jpg’); 
-whiteArmed = dir(‘./ExperimentFiles/whiteArmed/*.jpg’);  
-blackUnarmed = dir(‘./ExperimentFiles/blackUnarmed/*.jpg’);  
-whiteUnarmed = dir(‘./ExperimentFiles/whiteUnarmed/*.jpg’); 
+Armed = dir(‘./ExperimentFiles/Armed/*.jpg’); 
+
+Unarmed = dir(‘./ExperimentFiles/Unarmed/*.jpg’);  
 
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
 
@@ -33,7 +32,8 @@ destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+5
 
 textColor = [255 0 0];
 
-InstructTrial = ‘You will see two images appear. Press the F key if the cue points to a weapon. Press the J key if the cue does not point towards a weapon.’; 
+InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon.
+Press any key to continue.’; 
 Screen('TextSize', onScreen ,[50]);
 DrawFormattedText(onScreen, InstructTrial,[centerX],[centerY],[textColor]);
 Screen('Flip', onScreen);

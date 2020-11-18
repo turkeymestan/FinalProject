@@ -69,32 +69,41 @@ Screen('Flip', onScreen);
 
 pause (2);
 
-% Create matrix with 4 numbers
-M = [1 2 3 4];
+%% Create matrix for folders
+Folder = 1:4;
 % folder 1 black & gun
 % folder 2 black & no gun
 % folder 3 white & gun
 % folder 4 white & no gun
 
-% run trials 
+%% Create matrix for images
+Image = 1:NumImages; %NumImages = number of images in each folder (must be the same for all folders)
+
+%% run trials 
 for i=1: NumTrials 
-% randomize the matrix M
-loopOrder = randperm(length(M));
+% randomize the matrix "Folder"
+loopOrderFolder = randperm(length(Folder));
+% randomize the matrix "Image"
+loopOrderImage = randperm(length(Image));
 
     for j=1:NumTrials
-        %draw texture loopOrder(1) to left side of screen
+        % Set directory for proper folder
         
+        % Randomly select image from folder (loopOrderFolder(1))
+        
+        %draw texture loopOrderImage(1) to left side of screen
+        Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
     end
     
     for k=1:NumTrials
         if loopOrder(1) = 1
-            % then draw texture from folder 4 to right side of screen
+            % then draw texture (loopOrderImage(2)) from folder 4 to right side of screen
         if loopOrder(1) = 2
-            % then draw texture from folder 3 to right side of screen
+            % then draw texture (loopOrderImage(2)) from folder 3 to right side of screen
         if loopOrder(1) = 3
-            % then draw texture from folder 2 to right side of screen
+            % then draw texture (loopOrderImage(2)) from folder 2 to right side of screen
         if loopOrder(1) = 4
-            % then draw texture from folder 1 to right side of screen
+            % then draw texture (loopOrderImage(2)) from folder 1 to right side of screen
         end
     end
     

@@ -14,42 +14,17 @@ Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on th
 
 NumTrials = 50; % number of trials  
 
-dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folder, where there will be two other folders (1) Armed Files (2) Unarmed Files  
-
-% the “f” key is key number 70 
-% the “j” key is key number 74 
-BlackArmed = dir('./ExperimentPhotos/BlackArmed/*.jpg'); 
-WhiteArmed = dir('./ExperimentPhotos/WhiteArmed/*.jpg'); 
-BlackUnarmed = dir('./ExperimentPhotos/BlackUnarmed/*.jpg'); 
-WhiteUnarmed = dir('./ExperimentPhotos/WhiteUnarmed/*.jpg');  
-
+dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles folder, where there will be 4 other folders
 
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
 
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 
 
-displayWidth = 400;
-displayHeight = 400;
-
 destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
 
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
 
-textColor = [0 150 50];
-
-InstructTrial = 'A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon. Press any key to continue.'; 
-Screen('TextSize', onScreen ,[50]);
-DrawFormattedText(onScreen, InstructTrial,[centerX-400],[centerY],[textColor]);
-Screen('Flip', onScreen);
-
-[keyIsDown,secs,keyCode]=KbCheck(); % wait for a keypress
-
-while ~any(keyCode(KbName('space')))
-    [keyIsDown,secs,keyCode]=KbCheck();
-    if any(keyCode(KbName('space')))
-        Screen('CloseAll');
-    end 
- end 
+textColor = [255 0 0];
 
 %% D struct variables 
 D.time =
@@ -60,13 +35,11 @@ D.trialNumber =
 
 %% Set up directories/matrix for folders
 
-
 % Create directories for folders
 BW = dir(./ExperimentFiles/BlackArmed/*.jpg')); % folder 1 black & gun
 BNW = dir(./ExperimentFiles/BlackUnarmed/*.jpg')); % folder 2 black & no gun
 WW = dir(./ExperimentFiles/WhiteArmed/*.jpg')); % folder 3 white & gun
 WNW = dir(./ExperimentFiles/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
-
 
 % Create matrix for folders
 Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
@@ -74,15 +47,24 @@ Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
 %% Create matrix for images
 Image = 1:length(NumImages); %NumImages = number of images in each folder (must be the same for all folders)
 
+%% Present instructions and wait for key press
+InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon.
+Press any key to continue.’; 
+Screen('TextSize', onScreen ,[50]);
+DrawFormattedText(onScreen, InstructTrial,[centerX],[centerY],[textColor]);
+Screen('Flip', onScreen);
+
+while ~KbCheck() end % wait for a keypress
+
 %% Pause
 pause (2);
 
-%% run trials 
+%% Run trials 
 for i=1: NumTrials 
 % randomize the matrix "Folder"
 loopOrderFolder = randperm(length(Folder));
 % randomize the matrix "Image"
-loopOrderImage = randperm(length(Image));
+loopOrderImage = randperm(length(WhiteUnarmed.name)); 
 
     % Left Image 
     for j=1:NumTrials
@@ -129,6 +111,9 @@ loopOrderImage = randperm(length(Image));
     end
     
   % establish a method for determining whether the weapon was on the left or right
+  
+% the “f” key is key number 70 
+% the “j” key is key number 74 
   
   % wait for a response (keyboard input) 
   [keyIsDown,keyTime,keyCode] = KbCheck; 

@@ -3,7 +3,7 @@
 %% Clear all
 clear all; 
 clc; 
-%test edit
+
 %% Open the main screen 
 Screen('Preference','ConserveVRAM',64); 
 Screen('Preference', 'SkipSyncTests', 1); 
@@ -14,13 +14,10 @@ Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on th
 
 NumTrials = 50; % number of trials  
 
-dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles folder, where there will be two other folders (1) Armed Files (2) Unarmed Files  
+dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles folder, where there will be 4 other folders
 
 % the “f” key is key number 70 
 % the “j” key is key number 74 
-Armed = dir(‘./ExperimentFiles/Armed/*.jpg’); 
-
-Unarmed = dir(‘./ExperimentFiles/Unarmed/*.jpg’);  
 
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
 
@@ -51,10 +48,10 @@ D.trialNumber =
 % basically going to be using Lab 7 exercise 1B, but this time have two different parameters for imList? (how do you get it to draw from two different folders simultaneously?)
 
 %% Set up directories/matrix for folders
-BW = dir(fullfile(BlackWeaponImages,'/*.jpg')); % folder 1 black & gun
-BNW = dir(fullfile(BlackNoWeaponImages,'/*.jpg')); % folder 2 black & no gun
-WW = dir(fullfile(WhiteWeaponImages,'/*.jpg')); % folder 3 white & gun
-WNW = dir(fullfile(WhiteNoWeaponImages,'/*.jpg')); % folder 4 white & no gun
+BW = dir(./ExperimentFiles/BlackArmed/*.jpg')); % folder 1 black & gun
+BNW = dir(./ExperimentFiles/BlackUnarmed/*.jpg')); % folder 2 black & no gun
+WW = dir(./ExperimentFiles/WhiteArmed/*.jpg')); % folder 3 white & gun
+WNW = dir(./ExperimentFiles/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
 
 % Create matrix for folders
 Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
@@ -68,7 +65,6 @@ Screen('Flip', onScreen);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 pause (2);
-
 
 %%%% NOTES%%%%%
 % generate a random number between 1 and the number of images
@@ -89,6 +85,7 @@ loopOrderFolder = randperm(length(Folder));
 % randomize the matrix "Image"
 loopOrderImage = randperm(length(Image));
 
+    % Left Image 
     for j=1:NumTrials
         % Set directory for proper folder
         DirectoryLeft = Folder(loopOrderFolder(1));
@@ -97,34 +94,35 @@ loopOrderImage = randperm(length(Image));
         % Make texture
         textureLeft = Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(1)));
         %draw texture loopOrderImage(1) to left side of screen
-        Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
+        Screen(‘DrawTexture’, onScreen, loopOrderImage(1), destinationRect1);
     end
     
+    % Right Image
     for k=1:NumTrials
         if loopOrderFolder(1) = 1
             DirectoryRight = Folder(4);  % can also put WNW
             % Make texture
             textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
             % then draw texture (loopOrderImage(2)) from folder 4 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
+            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
         if loopOrderFolder(1) = 2
             DirectoryRight = Folder(3); % can also put WW
             % Make texture
             textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
             % then draw texture (loopOrderImage(2)) from folder 3 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
+            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
         if loopOrderFolder(1) = 3
             DirectoryRight = Folder(2); % can also put BNW
             % Make texture
             textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
             % then draw texture (loopOrderImage(2)) from folder 2 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
+            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
         if loopOrderFolder(1) = 4
             DirectoryRight = Folder(1); % can also put BW
             % Make texture
             textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
             % then draw texture (loopOrderImage(2)) from folder 1 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
+            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
         end
     end
     

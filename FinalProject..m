@@ -18,10 +18,9 @@ dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folde
 
 % the “f” key is key number 70 
 % the “j” key is key number 74 
-WhiteArmed = dir('./ExperimentPhotos/WhiteArmed/*.jpg'); 
-BlackArmed = dir('./ExperimentPhotos/BlackArmed/*.jpg'); 
-WhiteUnarmed = dir('./ExperimentPhotos/WhiteUnarmed/*.jpg');  
-BlackUnarmed = dir('./ExperimentPhotos/BlackUnarmed/*.jpg'); 
+Armed = dir('./ExperimentPhotos/Armed/*.jpg'); 
+
+Unarmed = dir('./ExperimentPhotos/Unarmed/*.jpg');  
 
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
 
@@ -64,10 +63,10 @@ D.trialNumber =
 % basically going to be using Lab 7 exercise 1B, but this time have two different parameters for imList? (how do you get it to draw from two different folders simultaneously?)
 
 %% Set up directories/matrix for folders
-BW = dir(fullfile(BlackWeaponImages,'/*.jpg')); % folder 1 black & gun
-BNW = dir(fullfile(BlackNoWeaponImages,'/*.jpg')); % folder 2 black & no gun
-WW = dir(fullfile(WhiteWeaponImages,'/*.jpg')); % folder 3 white & gun
-WNW = dir(fullfile(WhiteNoWeaponImages,'/*.jpg')); % folder 4 white & no gun
+BW = dir(fullfile(BlackArmed,'/*.jpg')); % folder 1 black & gun
+BNW = dir(fullfile(BlackUnarmed,'/*.jpg')); % folder 2 black & no gun
+WW = dir(fullfile(WhiteArmed,'/*.jpg')); % folder 3 white & gun
+WNW = dir(fullfile(WhiteUnarmed,'/*.jpg')); % folder 4 white & no gun
 
 % Create matrix for folders
 Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};

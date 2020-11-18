@@ -79,33 +79,39 @@ M = [1 2 3 4];
 % run trials 
 for i=1: NumTrials 
 % randomize the matrix M
+loopOrder = randperm(length(M));
+
     for j=1:NumTrials
-    loopOrder = randperm(length(M));
-    %draw texture
+        %draw texture
+        
+    end
     
     for k=1:NumTrials
-    if loopOrder(1) = 1
-    % then draw texture from folder 4
-    if loopOrder(1) = 2
-    % then draw texture from folder 3
-    if loopOrder(1) = 3
-    % then draw texture from folder 2
-    if loopOrder(1) = 4
-    % then draw texture from folder 1
+        if loopOrder(1) = 1
+            % then draw texture from folder 4
+        if loopOrder(1) = 2
+            % then draw texture from folder 3
+        if loopOrder(1) = 3
+            % then draw texture from folder 2
+        if loopOrder(1) = 4
+            % then draw texture from folder 1
+        end
+    end
     
   % establish a method for determining whether the weapon was on the left or right
+  
   % wait for a response (keyboard input) 
   [keyIsDown,keyTime,keyCode] = KbCheck; 
   if keyIsDown==1;
     whichKeys = find(keyCode==1);
     if keycode == 70 &  % label for weapon is left
-    % save correct to struct
+        % save correct to struct
     if keycode == 70 &  % label for weapon is right
-    % save incorrect to struct
+        % save incorrect to struct
     if keycode == 74 &  % label for weapon is right
-    % save correct to struct
+        % save correct to struct
     if keycode == 74 &  % label for weapon is left
-    % save incorrect to struct
+        % save incorrect to struct
     end
   end
   

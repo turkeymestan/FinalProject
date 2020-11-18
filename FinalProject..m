@@ -18,12 +18,6 @@ dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folde
 
 % the “f” key is key number 70 
 % the “j” key is key number 74 
-BlackArmed = dir('./ExperimentPhotos/BlackArmed/*.jpg'); 
-WhiteArmed = dir('./ExperimentPhotos/WhiteArmed/*.jpg'); 
-BlackUnarmed = dir('./ExperimentPhotos/BlackUnarmed/*.jpg'); 
-WhiteUnarmed = dir('./ExperimentPhotos/WhiteUnarmed/*.jpg');  
-
-
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
 
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 

@@ -52,8 +52,10 @@ D.trialNumber =
 
 % load images (4 folders: blackArmed, whiteArmed, blackUnarmed, whiteUnarmed) 
 % basically going to be using Lab 7 exercise 1B, but this time have two different parameters for imList? (how do you get it to draw from two different folders simultaneously?)
-imListWeapon = dir(’WeaponImages/*.jpg’); 
-imListNoWeapon = dir(’NoWeaponImages/*.jpg’); 
+BW = dir(’BlackWeaponImages/*.jpg’); % change folder name to 1
+BNW = dir(’BlackNoWeaponImages/*.jpg’); % change folder name to 2
+WW = dir(’WhiteWeaponImages/*.jpg’); % change folder name to 3
+WNW = dir(’WhiteNoWeaponImages/*.jpg’); % change folder name to 4
 imName = fullfile('ImageFiles', imLT(x).name);
 im = imread(''); %read image
 
@@ -70,14 +72,25 @@ Screen('Flip', onScreen);
 pause (2);
 
 %% Create matrix for folders
-Folder = 1:4;
+Folder = {'BW'; 'BNW'; 'WW'; 'WNW'}
 % folder 1 black & gun
 % folder 2 black & no gun
 % folder 3 white & gun
 % folder 4 white & no gun
 
 %% Create matrix for images
-Image = 1:NumImages; %NumImages = number of images in each folder (must be the same for all folders)
+Image = 1:length(; %NumImages = number of images in each folder (must be the same for all folders)
+
+%%%% NOTES%%%%%
+% get all images (here all *.jpg found in the current directory, but you can specify the format you want)
+MyImages = dir(fullfile(pwd,'*.jpg'));
+% generate a random number between 1 and the number of images
+RandomNumber = randi([1 size(MyImages,1)]);
+% get the corresponding name of the image 
+RandomImage = MyImages(RandomNumber).name;
+% display the image
+image(imread(RandomImage));
+%%%% END OF NOTES %%%%
 
 %% run trials 
 for i=1: NumTrials 

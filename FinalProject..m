@@ -69,10 +69,16 @@ Screen('Flip', onScreen);
 
 pause (2);
 
+% Create matrix with 4 numbers
+M = [1 2 3 4];
+
 % run trials 
 for i=1: NumTrials 
-  % show current images (one with gun, one without) 
-  imagesc(im);
+% randomize the matrix M
+    for j=1:NumTrials
+    loopOrder = randperm(length(M));
+    %draw texture
+    
   % establish a method for determining whether the weapon was on the left or right
   % wait for a response (keyboard input) 
   [keyIsDown,keyTime,keyCode] = KbCheck; 

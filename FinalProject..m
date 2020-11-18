@@ -69,10 +69,30 @@ Screen('Flip', onScreen);
 
 pause (2);
 
+% Create matrix with 4 numbers
+M = [1 2 3 4];
+% folder 1 black & gun
+% folder 2 black & no gun
+% folder 3 white & gun
+% folder 4 white & no gun
+
 % run trials 
 for i=1: NumTrials 
-  % show current images (one with gun, one without) 
-  imagesc(im);
+% randomize the matrix M
+    for j=1:NumTrials
+    loopOrder = randperm(length(M));
+    %draw texture
+    
+    for k=1:NumTrials
+    if loopOrder(1) = 1
+    % then draw texture from folder 4
+    if loopOrder(1) = 2
+    % then draw texture from folder 3
+    if loopOrder(1) = 3
+    % then draw texture from folder 2
+    if loopOrder(1) = 4
+    % then draw texture from folder 1
+    
   % establish a method for determining whether the weapon was on the left or right
   % wait for a response (keyboard input) 
   [keyIsDown,keyTime,keyCode] = KbCheck; 
@@ -99,4 +119,3 @@ Screen('CloseAll');
 
 % save your D struct in a .mat file in the DataFiles folder  
 % generate a figure for display 
-ddd

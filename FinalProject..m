@@ -61,18 +61,6 @@ Image = 1:length(NumImages); %NumImages = number of images in each folder (must 
 %% Pause
 pause (2);
 
-%%%% NOTES%%%%%
-% generate a random number between 1 and the number of images
-RandomNumber = randi([1 size(MyImages,1)]);
-% get the corresponding name of the image 
-RandomImage = MyImages(RandomNumber).name;
-% display the image
-image(imread(RandomImage));
-
-imName = fullfile('ImageFiles', imLT(x).name);
-im = imread(''); %read image
-%%%% END OF NOTES %%%%
-
 %% run trials 
 for i=1: NumTrials 
 % randomize the matrix "Folder"

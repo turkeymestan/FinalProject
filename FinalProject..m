@@ -44,10 +44,9 @@ D.race =
 D.correct = 
 D.trialNumber = 
 
-%% load images (4 folders: blackArmed, whiteArmed, blackUnarmed, whiteUnarmed) 
-% basically going to be using Lab 7 exercise 1B, but this time have two different parameters for imList? (how do you get it to draw from two different folders simultaneously?)
-
 %% Set up directories/matrix for folders
+
+% Create directories for folders
 BW = dir(./ExperimentFiles/BlackArmed/*.jpg')); % folder 1 black & gun
 BNW = dir(./ExperimentFiles/BlackUnarmed/*.jpg')); % folder 2 black & no gun
 WW = dir(./ExperimentFiles/WhiteArmed/*.jpg')); % folder 3 white & gun
@@ -59,11 +58,7 @@ Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
 %% Create matrix for images
 Image = 1:length(NumImages); %NumImages = number of images in each folder (must be the same for all folders)
 
-%%%%% is this needed? %%%%%%%
-DrawFormattedText(onScreen, instructTrial, [centerX],[centerY],[40 115 80]); 
-Screen('Flip', onScreen); 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%% Pause
 pause (2);
 
 %%%% NOTES%%%%%
@@ -87,18 +82,21 @@ loopOrderImage = randperm(length(Image));
 
     % Left Image 
     for j=1:NumTrials
-        % Set directory for proper folder
-        DirectoryLeft = Folder(loopOrderFolder(1));
         % Randomly select image from folder (loopOrderFolder(1))
-        
+        RandomNumberLeft = randi([1:length(Folder),1)]);
+        FolderLeft = Folder(loopOrderFolder(1));
+        RandomImageLeft = FolderLeft(RandomNumberLeft).name;
         % Make texture
-        textureLeft = Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(1)));
+        textureLeft = Screen(‘MakeTexture’, onScreen, RandomImageLeft);
         %draw texture loopOrderImage(1) to left side of screen
         Screen(‘DrawTexture’, onScreen, loopOrderImage(1), destinationRect1);
     end
     
     % Right Image
     for k=1:NumTrials
+        RandomNumberRight = randi([1:length(loopOrderFolder),1)]);
+        FolderRight = Folder(loopOrderFolder(1));
+        RandomImageRight = FolderRight(RandomNumberRight).name;
         if loopOrderFolder(1) = 1
             DirectoryRight = Folder(4);  % can also put WNW
             % Make texture

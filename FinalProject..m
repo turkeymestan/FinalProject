@@ -40,9 +40,6 @@ Screen('Flip', onScreen);
 
 while ~KbCheck() end % wait for a keypress
 
-
-
-
 %% D struct variables 
 D.time =
 D.subID =

@@ -52,10 +52,10 @@ D.trialNumber =
 
 % load images (4 folders: blackArmed, whiteArmed, blackUnarmed, whiteUnarmed) 
 % basically going to be using Lab 7 exercise 1B, but this time have two different parameters for imList? (how do you get it to draw from two different folders simultaneously?)
-BW = dir(’BlackWeaponImages/*.jpg’); % change folder name to 1
-BNW = dir(’BlackNoWeaponImages/*.jpg’); % change folder name to 2
-WW = dir(’WhiteWeaponImages/*.jpg’); % change folder name to 3
-WNW = dir(’WhiteNoWeaponImages/*.jpg’); % change folder name to 4
+BW = dir(’BlackWeaponImages/*.jpg’); % folder eq 1
+BNW = dir(’BlackNoWeaponImages/*.jpg’); % folder eq 2
+WW = dir(’WhiteWeaponImages/*.jpg’); % folder eq 3
+WNW = dir(’WhiteNoWeaponImages/*.jpg’); % folder eq 4
 imName = fullfile('ImageFiles', imLT(x).name);
 im = imread(''); %read image
 

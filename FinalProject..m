@@ -88,13 +88,13 @@ loopOrder = randperm(length(M));
     
     for k=1:NumTrials
         if loopOrder(1) = 1
-            % then draw texture from folder 4
+            % then draw texture from folder 4 to right side of screen
         if loopOrder(1) = 2
-            % then draw texture from folder 3
+            % then draw texture from folder 3 to right side of screen
         if loopOrder(1) = 3
-            % then draw texture from folder 2
+            % then draw texture from folder 2 to right side of screen
         if loopOrder(1) = 4
-            % then draw texture from folder 1
+            % then draw texture from folder 1 to right side of screen
         end
     end
     

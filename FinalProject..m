@@ -98,7 +98,7 @@ loopOrderImage = randperm(length(Image));
         % Randomly select image from folder (loopOrderFolder(1))
         
         % Make texture
-        textureLeft = 
+        textureLeft = Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(1)));
         %draw texture loopOrderImage(1) to left side of screen
         Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
     end
@@ -107,25 +107,25 @@ loopOrderImage = randperm(length(Image));
         if loopOrderFolder(1) = 1
             DirectoryRight = Folder(4);  % can also put WNW
             % Make texture
-            textureRight =
+            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
             % then draw texture (loopOrderImage(2)) from folder 4 to right side of screen
             Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
         if loopOrderFolder(1) = 2
             DirectoryRight = Folder(3); % can also put WW
             % Make texture
-            textureRight =
+            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
             % then draw texture (loopOrderImage(2)) from folder 3 to right side of screen
             Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
         if loopOrderFolder(1) = 3
             DirectoryRight = Folder(2); % can also put BNW
             % Make texture
-            textureRight =
+            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
             % then draw texture (loopOrderImage(2)) from folder 2 to right side of screen
             Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
         if loopOrderFolder(1) = 4
             DirectoryRight = Folder(1); % can also put BW
             % Make texture
-            textureRight = 
+            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
             % then draw texture (loopOrderImage(2)) from folder 1 to right side of screen
             Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
         end

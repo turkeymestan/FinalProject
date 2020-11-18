@@ -18,30 +18,36 @@ dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles fo
 
 % the “f” key is key number 70 
 % the “j” key is key number 74 
-Armed = dir(‘./ExperimentFiles/Armed/*.jpg’); 
+Armed = dir(‘./ExperimentPhotos/Armed/*.jpg’); 
 
-Unarmed = dir(‘./ExperimentFiles/Unarmed/*.jpg’);  
+Unarmed = dir(‘./ExperimentPhotos/Unarmed/*.jpg’);  
 
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
 
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 
 
+displayWidth = 400;
+displayHeight = 400;
+
 destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
 
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
 
-textColor = [255 0 0];
+textColor = [0 150 50];
 
-InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon.
-Press any key to continue.’; 
+InstructTrial = 'A cue will first appear. You will then see two images appear. \n Press the <F> key if the cue points to a weapon. \n Press the <J> key if the cue does not point towards a weapon. \n Press space to continue.'; 
 Screen('TextSize', onScreen ,[50]);
-DrawFormattedText(onScreen, InstructTrial,[centerX],[centerY],[textColor]);
+DrawFormattedText(onScreen, InstructTrial,[centerX-450],[centerY],[textColor]);
 Screen('Flip', onScreen);
 
-while ~KbCheck() end % wait for a keypress
-
-
-
+[keyIsDown,secs,keyCode]=KbCheck(); 
+ 
+while ~any(keyCode(KbName('space')))
+    [keyIsDown,secs,keyCode]=KbCheck();
+    if any(keyCode(KbName('space')))
+         Screen('CloseAll');  
+    end  
+end % wait for a keypress
 
 %% D struct variables 
 D.time =

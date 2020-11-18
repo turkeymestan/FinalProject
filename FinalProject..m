@@ -82,7 +82,7 @@ for i=1: NumTrials
 loopOrder = randperm(length(M));
 
     for j=1:NumTrials
-        %draw texture
+        %draw texture loopOrder(1) to left side of screen
         
     end
     

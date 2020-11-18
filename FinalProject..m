@@ -18,36 +18,30 @@ dir(‘ExperimentFiles/*.jpg’); % sets current directory to ExperimentFiles fo
 
 % the “f” key is key number 70 
 % the “j” key is key number 74 
-Armed = dir(‘./ExperimentPhotos/Armed/*.jpg’); 
+Armed = dir(‘./ExperimentFiles/Armed/*.jpg’); 
 
-Unarmed = dir(‘./ExperimentPhotos/Unarmed/*.jpg’);  
+Unarmed = dir(‘./ExperimentFiles/Unarmed/*.jpg’);  
 
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
 
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 
 
-displayWidth = 400;
-displayHeight = 400;
-
 destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
 
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
 
-textColor = [0 150 50];
+textColor = [255 0 0];
 
-InstructTrial = 'A cue will first appear. You will then see two images appear. \n Press the <F> key if the cue points to a weapon. \n Press the <J> key if the cue does not point towards a weapon. \n Press space to continue.'; 
+InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon.
+Press any key to continue.’; 
 Screen('TextSize', onScreen ,[50]);
-DrawFormattedText(onScreen, InstructTrial,[centerX-450],[centerY],[textColor]);
+DrawFormattedText(onScreen, InstructTrial,[centerX],[centerY],[textColor]);
 Screen('Flip', onScreen);
 
-[keyIsDown,secs,keyCode]=KbCheck(); 
- 
-while ~any(keyCode(KbName('space')))
-    [keyIsDown,secs,keyCode]=KbCheck();
-    if any(keyCode(KbName('space')))
-         Screen('CloseAll');  
-    end  
-end % wait for a keypress
+while ~KbCheck() end % wait for a keypress
+
+
+
 
 %% D struct variables 
 D.time =
@@ -56,20 +50,26 @@ D.race =
 D.correct = 
 D.trialNumber = 
 
-% load images (4 folders: blackArmed, whiteArmed, blackUnarmed, whiteUnarmed) 
+%% load images (4 folders: blackArmed, whiteArmed, blackUnarmed, whiteUnarmed) 
 % basically going to be using Lab 7 exercise 1B, but this time have two different parameters for imList? (how do you get it to draw from two different folders simultaneously?)
-BW = dir(’BlackWeaponImages/*.jpg’); % folder eq 1
-BNW = dir(’BlackNoWeaponImages/*.jpg’); % folder eq 2
-WW = dir(’WhiteWeaponImages/*.jpg’); % folder eq 3
-WNW = dir(’WhiteNoWeaponImages/*.jpg’); % folder eq 4
-imName = fullfile('ImageFiles', imLT(x).name);
-im = imread(''); %read image
 
-% counterbalance conditions and randomize trial order 
-% Text string telling subjects instructions  
+%% Set up directories/matrix for folders
+BW = dir(’BlackWeaponImages/*.jpg’); % folder 1 black & gun
+BNW = dir(’BlackNoWeaponImages/*.jpg’); % folder 2 black & no gun
+WW = dir(’WhiteWeaponImages/*.jpg’); % folder 3 white & gun
+WNW = dir(’WhiteNoWeaponImages/*.jpg’); % folder 4 white & no gun
 
+% Create matrix for folders
+Folder = {'BW'; 'BNW'; 'WW'; 'WNW'}
+
+%% Create matrix for images
+Image = 1:length(NumImages); %NumImages = number of images in each folder (must be the same for all folders)
+
+
+%%%%% is this needed? %%%%%%%
 DrawFormattedText(onScreen, instructTrial, [centerX],[centerY],[40 115 80]); 
 Screen('Flip', onScreen); 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % store text string in D struct 
 
@@ -77,15 +77,6 @@ Screen('Flip', onScreen);
 
 pause (2);
 
-%% Create matrix for folders
-Folder = {'BW'; 'BNW'; 'WW'; 'WNW'}
-% folder 1 black & gun
-% folder 2 black & no gun
-% folder 3 white & gun
-% folder 4 white & no gun
-
-%% Create matrix for images
-Image = 1:length(; %NumImages = number of images in each folder (must be the same for all folders)
 
 %%%% NOTES%%%%%
 % get all images (here all *.jpg found in the current directory, but you can specify the format you want)
@@ -96,6 +87,10 @@ RandomNumber = randi([1 size(MyImages,1)]);
 RandomImage = MyImages(RandomNumber).name;
 % display the image
 image(imread(RandomImage));
+
+
+imName = fullfile('ImageFiles', imLT(x).name);
+im = imread(''); %read image
 %%%% END OF NOTES %%%%
 
 %% run trials 
@@ -115,14 +110,18 @@ loopOrderImage = randperm(length(Image));
     end
     
     for k=1:NumTrials
-        if loopOrder(1) = 1
+        if loopOrderFolder(1) = 1
             % then draw texture (loopOrderImage(2)) from folder 4 to right side of screen
-        if loopOrder(1) = 2
+            Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
+        if loopOrderFolder(1) = 2
             % then draw texture (loopOrderImage(2)) from folder 3 to right side of screen
-        if loopOrder(1) = 3
+            Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
+        if loopOrderFolder(1) = 3
             % then draw texture (loopOrderImage(2)) from folder 2 to right side of screen
-        if loopOrder(1) = 4
+            Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
+        if loopOrderFolder(1) = 4
             % then draw texture (loopOrderImage(2)) from folder 1 to right side of screen
+            Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
         end
     end
     

@@ -101,7 +101,7 @@ loopOrderImage = randperm(length(Image));
 
     for j=1:NumTrials
         % Set directory for proper folder
-        
+        leftFolder = Folder(loopOrderFolder);
         % Randomly select image from folder (loopOrderFolder(1))
         
         %draw texture loopOrderImage(1) to left side of screen

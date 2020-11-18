@@ -54,40 +54,32 @@ D.trialNumber =
 % basically going to be using Lab 7 exercise 1B, but this time have two different parameters for imList? (how do you get it to draw from two different folders simultaneously?)
 
 %% Set up directories/matrix for folders
-BW = dir(’BlackWeaponImages/*.jpg’); % folder 1 black & gun
-BNW = dir(’BlackNoWeaponImages/*.jpg’); % folder 2 black & no gun
-WW = dir(’WhiteWeaponImages/*.jpg’); % folder 3 white & gun
-WNW = dir(’WhiteNoWeaponImages/*.jpg’); % folder 4 white & no gun
+BW = dir(fullfile(BlackWeaponImages,'/*.jpg')); % folder 1 black & gun
+BNW = dir(fullfile(BlackNoWeaponImages,'/*.jpg')); % folder 2 black & no gun
+WW = dir(fullfile(WhiteWeaponImages,'/*.jpg')); % folder 3 white & gun
+WNW = dir(fullfile(WhiteNoWeaponImages,'/*.jpg')); % folder 4 white & no gun
 
 % Create matrix for folders
-Folder = {'BW'; 'BNW'; 'WW'; 'WNW'}
+Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
 
 %% Create matrix for images
 Image = 1:length(NumImages); %NumImages = number of images in each folder (must be the same for all folders)
-
 
 %%%%% is this needed? %%%%%%%
 DrawFormattedText(onScreen, instructTrial, [centerX],[centerY],[40 115 80]); 
 Screen('Flip', onScreen); 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% store text string in D struct 
-
-% clear text string
-
 pause (2);
 
 
 %%%% NOTES%%%%%
-% get all images (here all *.jpg found in the current directory, but you can specify the format you want)
-MyImages = dir(fullfile(pwd,'*.jpg'));
 % generate a random number between 1 and the number of images
 RandomNumber = randi([1 size(MyImages,1)]);
 % get the corresponding name of the image 
 RandomImage = MyImages(RandomNumber).name;
 % display the image
 image(imread(RandomImage));
-
 
 imName = fullfile('ImageFiles', imLT(x).name);
 im = imread(''); %read image
@@ -102,26 +94,40 @@ loopOrderImage = randperm(length(Image));
 
     for j=1:NumTrials
         % Set directory for proper folder
-        leftFolder = Folder(loopOrderFolder);
+        DirectoryLeft = Folder(loopOrderFolder(1));
         % Randomly select image from folder (loopOrderFolder(1))
         
+        % Make texture
+        textureLeft = 
         %draw texture loopOrderImage(1) to left side of screen
         Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
     end
     
     for k=1:NumTrials
         if loopOrderFolder(1) = 1
+            DirectoryRight = Folder(4);  % can also put WNW
+            % Make texture
+            textureRight =
             % then draw texture (loopOrderImage(2)) from folder 4 to right side of screen
-            Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
+            Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
         if loopOrderFolder(1) = 2
+            DirectoryRight = Folder(3); % can also put WW
+            % Make texture
+            textureRight =
             % then draw texture (loopOrderImage(2)) from folder 3 to right side of screen
-            Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
+            Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
         if loopOrderFolder(1) = 3
+            DirectoryRight = Folder(2); % can also put BNW
+            % Make texture
+            textureRight =
             % then draw texture (loopOrderImage(2)) from folder 2 to right side of screen
-            Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
+            Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
         if loopOrderFolder(1) = 4
+            DirectoryRight = Folder(1); % can also put BW
+            % Make texture
+            textureRight = 
             % then draw texture (loopOrderImage(2)) from folder 1 to right side of screen
-            Screen(‘DrawTexture’, onScreen, loopOrderImage(1), [,sourceRect] [,destinationRect]);
+            Screen(‘DrawTexture’, onScreen, texture, [,sourceRect] [,destinationRect]);
         end
     end
     

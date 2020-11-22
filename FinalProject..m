@@ -23,6 +23,7 @@ centerX = screenRect(3)/2; % center ‘X’ coordinate
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 
 % setting subject ID
 sid = input('Enter your ID number:', 's') % not sure how this works, just saw it in the group me. 
+save(sid,'ID')
 
 displayWidth = 400;
 displayHeight = 400;

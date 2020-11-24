@@ -26,6 +26,7 @@ centerX = screenRect(3)/2; % center ‘X’ coordinate
 
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 
 % setting subject ID
+% resource for someone else doing subject ID https://www.mathworks.com/matlabcentral/answers/325830-save-matrix-with-unique-subject-id-to-new-file
 sid = input('Enter your ID number:', 's') % not sure how this works, just saw it in the group me. 
 save(sid,'ID')
 

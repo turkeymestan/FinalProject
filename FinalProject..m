@@ -37,6 +37,8 @@ destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+5
 textColor = [255 0 0];
 
 %% D struct variables 
+fID = fopen('ExperimentResults.txt', 'w'); % creates new text file titled ExperimentResults
+% to write to ExperimentResults = fprint(fID, '%s\t%s\t%d\n')
 D.time =
 D.subID =
 D.race = 
@@ -70,6 +72,7 @@ while ~KbCheck() end % wait for a keypress
 pause (2);
 
 %% Run trials 
+% see displayRSVP_record from lab 4 for writing to data file in data set.
 for i=1: NumTrials 
 % randomize the matrix "Folder"
 loopOrderFolder = randperm(length(Folder));

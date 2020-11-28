@@ -20,19 +20,19 @@ dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folde
 % the “j” key is key number 74 
 
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
-
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 
+
 % setting subject ID
-sid = input('Enter your ID number:', 's') % not sure how this works, just saw it in the group me. 
+sid = input('Enter your ID number:', 's') 
 save(sid,'ID')
 
 destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
-
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
 
 textColor = [255 0 0];
 
-%% D struct variables 
+fID = fopen('ExperimentResults.txt', 'w'); % creates new text file titled ExperimentResults
+% to write to ExperimentResults = fprint(fID, '%s\t%s\t%d\n')
 D.time =
 D.subID =
 D.race = 
@@ -60,7 +60,14 @@ Screen('TextSize', onScreen ,[50]);
 DrawFormattedText(onScreen, InstructTrial,[centerX],[centerY],[textColor]);
 Screen('Flip', onScreen);
 
-while ~KbCheck() end % wait for a keypress
+[keyIsDown,secs,keyCode]=KbCheck(); 
+ 
+while ~any(keyCode(KbName('space')))
+    [keyIsDown,secs,keyCode]=KbCheck();
+    if any(keyCode(KbName('space')))
+         Screen('CloseAll');  
+    end  
+end 
 
 %% Pause
 pause (2);

@@ -48,10 +48,10 @@ D.trialNumber =
 %% Set up directories/matrix for folders
 
 % Create directories for folders
-BW = dir(./ExperimentFiles/BlackArmed/*.jpg')); % folder 1 black & gun
-BNW = dir(./ExperimentFiles/BlackUnarmed/*.jpg')); % folder 2 black & no gun
-WW = dir(./ExperimentFiles/WhiteArmed/*.jpg')); % folder 3 white & gun
-WNW = dir(./ExperimentFiles/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
+BW = dir(./ExperimentPhotos/BlackArmed/*.jpg')); % folder 1 black & gun
+BNW = dir(./ExperimentPhotos/BlackUnarmed/*.jpg')); % folder 2 black & no gun
+WW = dir(./ExperimentPhotos/WhiteArmed/*.jpg')); % folder 3 white & gun
+WNW = dir(./ExperimentPhotos/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
 
 % Create matrix for folders
 Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
@@ -60,10 +60,9 @@ Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
 Image = 1:length(NumImages); %NumImages = number of images in each folder (must be the same for all folders)
 
 %% Present instructions and wait for key press
-InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon.
-Press any key to continue.’; 
+InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon. Press any key to continue.’; 
 Screen('TextSize', onScreen ,[50]);
-DrawFormattedText(onScreen, InstructTrial,[centerX],[centerY],[textColor]);
+DrawFormattedText(onScreen, InstructTrial,[centerX-450],[centerY],[textColor]);
 Screen('Flip', onScreen);
 
 [keyIsDown,secs,keyCode]=KbCheck(); 

@@ -14,9 +14,6 @@ Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on th
 
 NumTrials = 50; % number of trials  
 
-
-
-
 dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folder, where there will be two other folders (1) Armed Files (2) Unarmed Files  
 
 % the “f” key is key number 70 

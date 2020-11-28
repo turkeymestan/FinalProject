@@ -66,7 +66,14 @@ Screen('TextSize', onScreen ,[50]);
 DrawFormattedText(onScreen, InstructTrial,[centerX],[centerY],[textColor]);
 Screen('Flip', onScreen);
 
-while ~KbCheck() end % wait for a keypress
+[keyIsDown,secs,keyCode]=KbCheck(); 
+ 
+while ~any(keyCode(KbName('space')))
+    [keyIsDown,secs,keyCode]=KbCheck();
+    if any(keyCode(KbName('space')))
+         Screen('CloseAll');  
+    end  
+end 
 
 %% Pause
 pause (2);

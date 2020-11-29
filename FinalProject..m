@@ -58,6 +58,12 @@ Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
 
 %% Create matrix for images
 Image = 1:length(NumImages); %NumImages = number of images in each folder (must be the same for all folders)
+%% Record subject ID
+IDstring = 'Please enter your initials into the command window. (box with prompt "Enter your initials:"). \n Press space to exit this screen.';
+Screen('TextSize', onScreen, [50]);
+DrawFormattedText(onScreen, IDstring, [centerX-550], [centerY], [textColor]);
+Screen('Flip', onScreen); 
+
 
 %% Present instructions and wait for key press
 InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon. Press any key to continue.’; 

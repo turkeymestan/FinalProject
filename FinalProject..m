@@ -64,6 +64,18 @@ Screen('TextSize', onScreen, [50]);
 DrawFormattedText(onScreen, IDstring, [centerX-550], [centerY], [textColor]);
 Screen('Flip', onScreen); 
 
+[keyIsDown,secs,keyCode]=KbCheck(); 
+ 
+while ~any(keyCode(KbName('space')))
+    [keyIsDown,secs,keyCode]=KbCheck();
+    if any(keyCode(KbName('space')))
+         Screen('CloseAll');  
+    end  
+end % wait for a keypress
+
+sid = input('Enter your initials:', 's');
+save(sid,'D.subID');
+
 
 %% Present instructions and wait for key press
 InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon. Press any key to continue.’; 

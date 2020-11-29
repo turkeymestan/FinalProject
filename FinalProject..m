@@ -79,7 +79,7 @@ answer = inputdlg(prompt,dlgtitle,dims,definput);
 
 D.subID = answer; 
 save('ExperimentResults.txt','D.subID');
-
+T = struct2table(D)
 
 %% Present instructions and wait for key press
 InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon. Press any key to continue.’; 

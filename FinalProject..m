@@ -37,8 +37,6 @@ destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+5
 textColor = [255 0 0];
 
 %% D struct variables 
-fID = fopen('ExperimentResults.txt', 'w'); % creates new text file titled ExperimentResults
-% to write to ExperimentResults = fprint(fID, '%s\t%s\t%d\n')
 D.time =
 D.subID =
 D.race = 
@@ -59,7 +57,7 @@ Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
 %% Create matrix for images
 Image = 1:length(NumImages); %NumImages = number of images in each folder (must be the same for all folders)
 %% Record subject ID
-IDstring = 'Please enter your initials into the command window. (box with prompt "Enter your initials:"). \n Press space to exit this screen.';
+IDstring = 'Please enter your first and last name into the dialog box.  \n Press space to exit this screen.';
 Screen('TextSize', onScreen, [50]);
 DrawFormattedText(onScreen, IDstring, [centerX-550], [centerY], [textColor]);
 Screen('Flip', onScreen); 
@@ -73,8 +71,14 @@ while ~any(keyCode(KbName('space')))
     end  
 end % wait for a keypress
 
-sid = input('Enter your initials:', 's');
-save(sid,'D.subID');
+prompt = {'Enter first name:','Enter last name:'}; % these lines create a dialog box for subject ID input.
+dlgtitle = 'Subject ID';
+dims = [1 35];
+definput = {'First', 'Last'};
+answer = inputdlg(prompt,dlgtitle,dims,definput);
+
+D.subID = answer; 
+save('ExperimentResults.txt','D.subID');
 
 
 %% Present instructions and wait for key press

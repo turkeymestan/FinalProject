@@ -38,7 +38,6 @@ textColor = [255 0 0];
 
 %% D struct variables 
 D.time =
-D.subID =
 D.race = 
 D.correct = 
 D.trialNumber = 
@@ -81,6 +80,8 @@ D.subID = answer;
 save('ExperimentResults.txt','D.subID');
 T = struct2table(D)
 
+[onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
+Screen('FillRect', onScreen, [255 255 255]); 
 %% Present instructions and wait for key press
 InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon. Press any key to continue.’; 
 Screen('TextSize', onScreen ,[50]);

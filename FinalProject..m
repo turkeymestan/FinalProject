@@ -14,29 +14,21 @@ Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on th
 
 NumTrials = 50; % number of trials  
 
-
-
-
 dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folder, where there will be two other folders (1) Armed Files (2) Unarmed Files  
 
 % the “f” key is key number 70 
 % the “j” key is key number 74 
 
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
-
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 
-% setting subject ID
-% resource for someone else doing subject ID https://www.mathworks.com/matlabcentral/answers/325830-save-matrix-with-unique-subject-id-to-new-file
-sid = input('Enter your ID number:', 's') % not sure how this works, just saw it in the group me. 
-save(sid,'ID')
 
 destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
-
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
 
 textColor = [255 0 0];
 
-%% D struct variables 
+fID = fopen('ExperimentResults.txt', 'w'); % creates new text file titled ExperimentResults
+% to write to ExperimentResults = fprint(fID, '%s\t%s\t%d\n')
 D.time =
 D.race = 
 D.correct = 

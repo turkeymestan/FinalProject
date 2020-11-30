@@ -22,10 +22,6 @@ dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folde
 centerX = screenRect(3)/2; % center ‘X’ coordinate 
 centerY = screenRect(4)/2; % center ‘Y’ coordinate 
 
-% setting subject ID
-sid = input('Enter your ID number:', 's') 
-save(sid,'ID')
-
 destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
 
@@ -34,7 +30,6 @@ textColor = [255 0 0];
 fID = fopen('ExperimentResults.txt', 'w'); % creates new text file titled ExperimentResults
 % to write to ExperimentResults = fprint(fID, '%s\t%s\t%d\n')
 D.time =
-D.subID =
 D.race = 
 D.correct = 
 D.trialNumber = 
@@ -42,22 +37,47 @@ D.trialNumber =
 %% Set up directories/matrix for folders
 
 % Create directories for folders
-BW = dir(./ExperimentFiles/BlackArmed/*.jpg')); % folder 1 black & gun
-BNW = dir(./ExperimentFiles/BlackUnarmed/*.jpg')); % folder 2 black & no gun
-WW = dir(./ExperimentFiles/WhiteArmed/*.jpg')); % folder 3 white & gun
-WNW = dir(./ExperimentFiles/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
+BW = dir(./ExperimentPhotos/BlackArmed/*.jpg')); % folder 1 black & gun
+BNW = dir(./ExperimentPhotos/BlackUnarmed/*.jpg')); % folder 2 black & no gun
+WW = dir(./ExperimentPhotos/WhiteArmed/*.jpg')); % folder 3 white & gun
+WNW = dir(./ExperimentPhotos/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
 
 % Create matrix for folders
 Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
 
 %% Create matrix for images
 Image = 1:length(NumImages); %NumImages = number of images in each folder (must be the same for all folders)
+%% Record subject ID
+IDstring = 'Please enter your first and last name into the dialog box.  \n Press space to exit this screen.';
+Screen('TextSize', onScreen, [50]);
+DrawFormattedText(onScreen, IDstring, [centerX-550], [centerY], [textColor]);
+Screen('Flip', onScreen); 
 
+[keyIsDown,secs,keyCode]=KbCheck(); 
+ 
+while ~any(keyCode(KbName('space')))
+    [keyIsDown,secs,keyCode]=KbCheck();
+    if any(keyCode(KbName('space')))
+         Screen('CloseAll');  
+    end  
+end % wait for a keypress
+
+prompt = {'Enter first name:','Enter last name:'}; % these lines create a dialog box for subject ID input.
+dlgtitle = 'Subject ID';
+dims = [1 35];
+definput = {'First', 'Last'};
+answer = inputdlg(prompt,dlgtitle,dims,definput);
+
+D.subID = answer; 
+save('ExperimentResults.txt','D.subID');
+T = struct2table(D)
+
+[onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
+Screen('FillRect', onScreen, [255 255 255]); 
 %% Present instructions and wait for key press
-InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon.
-Press any key to continue.’; 
+InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon. Press any key to continue.’; 
 Screen('TextSize', onScreen ,[50]);
-DrawFormattedText(onScreen, InstructTrial,[centerX],[centerY],[textColor]);
+DrawFormattedText(onScreen, InstructTrial,[centerX-450],[centerY],[textColor]);
 Screen('Flip', onScreen);
 
 [keyIsDown,secs,keyCode]=KbCheck(); 
@@ -73,6 +93,7 @@ end
 pause (2);
 
 %% Run trials 
+% see displayRSVP_record from lab 4 for writing to data file in data set.
 for i=1: NumTrials 
 % randomize the matrix "Folder"
 loopOrderFolder = randperm(length(Folder));

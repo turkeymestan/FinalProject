@@ -10,6 +10,36 @@ Screen('Preference', 'SkipSyncTests', 1);
 [onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
 Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on the offscreen buffer) 
 
+%% Record subject ID
+IDstring = 'Please enter your first and last name into the dialog box.  \n Press space to exit this screen.';
+Screen('TextSize', onScreen, 50);
+DrawFormattedText(onScreen, IDstring, [centerX-550], centerY, textColor);
+Screen('Flip', onScreen); 
+
+[keyIsDown,secs,keyCode]=KbCheck(); 
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Get rid of nested if statement; 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+while ~any(keyCode(KbName('space')))
+    [keyIsDown,secs,keyCode]=KbCheck();
+    if any(keyCode(KbName('space')))
+    end  
+end % wait for a keypress
+
+prompt = {'Enter first name:','Enter last name:'}; % these lines create a dialog box for subject ID input.
+dlgtitle = 'Subject ID';
+dims = [1 35];
+definput = {'First', 'Last'};
+answer = input (prompt,dlgtitle,dims,definput);
+
+D.subID = answer; 
+save('ExperimentResults.txt','D.subID');
+T = struct2table(D)
+
+[onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
+Screen('FillRect', onScreen, [255 255 255]); 
+
 %% Define Variables 
 
 NumTrials = 50; % number of trials  
@@ -61,45 +91,11 @@ fromV2 = screenCenterY-fixation.size;
 toH2   = screenCenterX;
 toV2   = screenCenterY+fixation.size;
 
-% Create directories for folders
+%% Create directories for folders
 a = dir(fullfile('BlackArmed/*.jpg')); % folder 1 black & gun
 b = dir(fullfile('BlackUnarmed/*.jpg')); % folder 2 black & no gun
 c = dir(fullfile('WhiteArmed/*.jpg')); % folder 3 white & gun
 d = dir(fullfile('WhiteUnarmed/*.jpg')); % folder 4 white & no gun
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Move subject ID to beginning of code
-% use 'input' rather than 'inputdlg' - not sure where that is
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Record subject ID
-IDstring = 'Please enter your first and last name into the dialog box.  \n Press space to exit this screen.';
-Screen('TextSize', onScreen, [50]);
-DrawFormattedText(onScreen, IDstring, [centerX-550], [centerY], [textColor]);
-Screen('Flip', onScreen); 
-
-[keyIsDown,secs,keyCode]=KbCheck(); 
- 
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- % Get rid of nested if statement; may not need to now as it just keeps running until if statemnt is met
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-while ~any(keyCode(KbName('space')))
-    [keyIsDown,secs,keyCode]=KbCheck();
-    if any(keyCode(KbName('space')))
-    end  
-end % wait for a keypress
-
-prompt = {'Enter first name:','Enter last name:'}; % these lines create a dialog box for subject ID input.
-dlgtitle = 'Subject ID';
-dims = [1 35];
-definput = {'First', 'Last'};
-answer = inputdlg(prompt,dlgtitle,dims,definput);
-
-D.subID = answer; 
-save('ExperimentResults.txt','D.subID');
-T = struct2table(D)
-
-[onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
-Screen('FillRect', onScreen, [255 255 255]); 
 
 %% Present instructions and wait for key press
 InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the cue points to a weapon.\nPress the <J> key if the cue does not point towards a weapon.\nPress the space  key to continue.'; 

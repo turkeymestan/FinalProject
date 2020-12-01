@@ -22,6 +22,10 @@ dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folde
 centerX = screenRect(3)/2; % center X coordinate 
 centerY = screenRect(4)/2; % center Y coordinate 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Define displayWidth & displayHeight OR load all images in before for loop and use size(imageLeft) w/in for loop
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
 
@@ -63,6 +67,10 @@ b = dir(fullfile('BlackUnarmed/*.jpg')); % folder 2 black & no gun
 c = dir(fullfile('WhiteArmed/*.jpg')); % folder 3 white & gun
 d = dir(fullfile('WhiteUnarmed/*.jpg')); % folder 4 white & no gun
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Move subject ID to beginning of code
+% use 'input' rather than 'inputdlg' - not sure where that is
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Record subject ID
 IDstring = 'Please enter your first and last name into the dialog box.  \n Press space to exit this screen.';
 Screen('TextSize', onScreen, [50]);
@@ -71,6 +79,9 @@ Screen('Flip', onScreen);
 
 [keyIsDown,secs,keyCode]=KbCheck(); 
  
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Get rid of nested if statement; may not need to now as it just keeps running until if statemnt is met
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 while ~any(keyCode(KbName('space')))
     [keyIsDown,secs,keyCode]=KbCheck();
     if any(keyCode(KbName('space')))
@@ -176,13 +187,13 @@ end
   [keyIsDown,keyTime,keyCode] = KbCheck; 
   if keyIsDown==1;
     whichKeys = find(keyCode==1);
-    if keycode == 70 &  % label for weapon is left
+    if keyCode == 70 &  % label for weapon is left
         % save correct to struct
-    if keycode == 70 &  % label for weapon is right
+    else if keyCode == 70 &  % label for weapon is right
         % save incorrect to struct
-    if keycode == 74 &  % label for weapon is right
+    else if keyCode == 74 &  % label for weapon is right
         % save correct to struct
-    if keycode == 74 &  % label for weapon is left
+    else if keyCode == 74 &  % label for weapon is left
         % save incorrect to struct
     end
   end

@@ -13,7 +13,7 @@ definput = {'First', 'Last'};
 answer = input (prompt,dlgtitle,dims,definput);
 
 D.subID = answer; 
-save('ExperimentResults.txt','D.subID');
+%save('ExperimentResults.txt','D.subID');
 %% Open the main screen 
 Screen('Preference','ConserveVRAM',64); 
 Screen('Preference', 'SkipSyncTests', 1); 

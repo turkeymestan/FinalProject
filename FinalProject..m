@@ -4,32 +4,8 @@
 clear all; 
 clc; 
 
-%% Open the main screen 
-Screen('Preference','ConserveVRAM',64); 
-Screen('Preference', 'SkipSyncTests', 1); 
-[onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
-Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on the offscreen buffer) 
 
-% formatting text for drawing 
-centerX = screenRect(3)/2;
-centerY = screenRect(4)/2; % need these two statements for the text to write in the correct location.
-textColor = [0 150 80];
-IDstring = 'Please enter your first and last name into the dialog box.  \n Press space to exit this screen.';
-Screen('TextSize', onScreen, 50);
-DrawFormattedText(onScreen, IDstring, [centerX-550], centerY, textColor);
-Screen('Flip', onScreen); 
-%% Record subject ID
-[keyIsDown,secs,keyCode]=KbCheck(); 
- 
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- % Get rid of nested if statement; 
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-while ~any(keyCode(KbName('space')))
-    [keyIsDown,secs,keyCode]=KbCheck();
-    if any(keyCode(KbName('space')))
-    end  
-end % wait for a keypress
-
+%% recording user input (before psychtoolbox window opens)
 prompt = {'Enter first name:','Enter last name:'}; % these lines create a dialog box for subject ID input.
 dlgtitle = 'Subject ID';
 dims = [1 35];
@@ -38,11 +14,18 @@ answer = input (prompt,dlgtitle,dims,definput);
 
 D.subID = answer; 
 save('ExperimentResults.txt','D.subID');
-T = struct2table(D)
-
+%% Open the main screen 
+Screen('Preference','ConserveVRAM',64); 
+Screen('Preference', 'SkipSyncTests', 1); 
 [onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
-Screen('FillRect', onScreen, [255 255 255]); 
+Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on the offscreen buffer) 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Get rid of nested if statement; 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+T = struct2table(D)
 %% Define Variables 
 
 NumTrials = 50; % number of trials  
@@ -51,9 +34,10 @@ dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folde
 
 % the f key is key number 70 
 % the j key is key number 74 
-
+%% formatting text for drawing 
 centerX = screenRect(3)/2; % center X coordinate 
 centerY = screenRect(4)/2; % center Y coordinate 
+textColor = [0 150 80];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Define displayWidth & displayHeight OR load all images in before for loop and use size(imageLeft) w/in for loop
@@ -62,9 +46,7 @@ centerY = screenRect(4)/2; % center Y coordinate
 destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
 
-textColor = [255 0 0];
-
-fID = fopen('ExperimentResults.txt', 'w'); % creates new text file titled ExperimentResults
+%fID = fopen('ExperimentResults.txt', 'w'); % creates new text file titled ExperimentResults
 % to write to ExperimentResults = fprint(fID, '%s\t%s\t%d\n')
 D.time =
 D.race = 
@@ -107,11 +89,8 @@ DrawFormattedText(onScreen, InstructTrial,[centerX-450],[centerY],[textColor]);
 Screen('Flip', onScreen);
 
 [keyIsDown,secs,keyCode]=KbCheck(); 
- 
 while ~any(keyCode(KbName('space')))
     [keyIsDown,secs,keyCode]=KbCheck();
-    if any(keyCode(KbName('space')))
-    end  
 end 
 
 InstructTrial = 'The session will begin in...';

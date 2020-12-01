@@ -13,7 +13,7 @@ definput = {'First', 'Last'};
 answer = input (prompt,dlgtitle,dims,definput);
 
 D.subID = answer; 
-save('ExperimentResults.txt','D.subID');
+%save('ExperimentResults.txt','D.subID');
 %% Open the main screen 
 Screen('Preference','ConserveVRAM',64); 
 Screen('Preference', 'SkipSyncTests', 1); 
@@ -48,10 +48,10 @@ destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+5
 
 %fID = fopen('ExperimentResults.txt', 'w'); % creates new text file titled ExperimentResults
 % to write to ExperimentResults = fprint(fID, '%s\t%s\t%d\n')
-D.time =
-D.race = 
-D.correct = 
-D.trialNumber = 
+%D.time =
+%D.race = 
+%D.correct = 
+%D.trialNumber = 
 
 %% Fixation cross
 screenWidth   = screenRect(3)-screenRect(1); % width of screen = right-left
@@ -77,10 +77,10 @@ toH2   = screenCenterX;
 toV2   = screenCenterY+fixation.size;
 
 %% Create directories for folders
-a = dir(fullfile('BlackArmed/*.jpg')); % folder 1 black & gun
-b = dir(fullfile('BlackUnarmed/*.jpg')); % folder 2 black & no gun
-c = dir(fullfile('WhiteArmed/*.jpg')); % folder 3 white & gun
-d = dir(fullfile('WhiteUnarmed/*.jpg')); % folder 4 white & no gun
+a = dir(fullfile('ExperimentPhotos/BlackArmed/*.jpg')); % folder 1 black & gun
+b = dir(fullfile('ExperimentPhotos/BlackUnarmed/*.jpg')); % folder 2 black & no gun
+c = dir(fullfile('ExperimentPhotos/WhiteArmed/*.jpg')); % folder 3 white & gun
+d = dir(fullfile('ExperimentPhotos/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
 
 %% Present instructions and wait for key press
 InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the cue points to a weapon.\nPress the <J> key if the cue does not point towards a weapon.\nPress the space  key to continue.'; 
@@ -126,27 +126,29 @@ RandomNumberRight = Ranint(1,10);
        % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
-       else if loopOrderFolder(1)==2;
-         imageLeft = imread(b(RandomNumberLeft).name);
-         imageRight = imread(c(RandomNumberRight).name);
+   elseif loopOrderFolder(1)==2;
+       imageLeft = imread(b(RandomNumberLeft).name);
+       imageRight = imread(c(RandomNumberRight).name);
          % Make texture
-         textureLeft=Screen('MakeTexture', onScreen, imageLeft);
-         textureRight=Screen('MakeTexture', onScreen, imageRight);
-       else if loopOrderFolder(1)==3;
-         imageLeft = imread(c(RandomNumberLeft).name);
-         imageRight = imread(b(RandomNumberRight).name);
+       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
+       textureRight=Screen('MakeTexture', onScreen, imageRight);
+   elseif loopOrderFolder(1)==3;
+       imageLeft = imread(c(RandomNumberLeft).name);
+       imageRight = imread(b(RandomNumberRight).name);
          % Make texture
-         textureLeft=Screen('MakeTexture', onScreen, imageLeft);
-         textureRight=Screen('MakeTexture', onScreen, imageRight);
-           else
-        imageLeft = imread(d(RandomNumberLeft).name);
-        imageRight = imread(a(RandomNumberRight).name);
+       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
+       textureRight=Screen('MakeTexture', onScreen, imageRight);
+   elseif loopOrderFolder(1)==4;
+      imageLeft = imread(d(RandomNumberLeft).name);
+      imageRight = imread(a(RandomNumberRight).name);
         % Make texture
-        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
-        textureRight=Screen('MakeTexture', onScreen, imageRight);
-           end
-           end
-    end
+      textureLeft=Screen('MakeTexture', onScreen, imageLeft);
+      textureRight=Screen('MakeTexture', onScreen, imageRight);
+   end
+ end
+ 
+ %% resource for insufficient memory error -> https://github.com/Psychtoolbox-3/Psychtoolbox-3/issues/276
+ % ^ says occurs when using multiple screens? Does the virual desktop treat its projection as an extra screen?
 %draw fixation cross 
 Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
 Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
@@ -187,8 +189,6 @@ tic
             else
                 GunCorrect = 0;
             end
-         end
-         end
     end
 end
   % establish a method for determining whether the weapon was on the left or right

@@ -171,6 +171,21 @@ RandomNumberRight = Ranint(1,10);
 %draw fixation cross 
 Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
 Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
+%draw cue
+Cue = Ranint(1,2);
+    if Cue == 1
+        Screen('FillOval', onScreen, [255 0 0], [centerX-255 centerY-5 centerX-245 centerY+5], [40]);
+        CuePosition = 'left';
+    else
+        Screen('FillOval', onScreen, [255 0 0], [centerX+245 centerY-5 centerX+255 centerY+5], [40]);
+        CuePosition = 'right';
+    end
+        % Draw Circle On Main Screen
+Screen('Flip', onScreen);
+pause(.2);
+%draw fixation cross  
+Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
+Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
 %draw textures to left and right sides of screen
 Screen('DrawTexture', onScreen, textureLeft, [],destinationRect1)
 Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)

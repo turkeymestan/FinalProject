@@ -146,6 +146,9 @@ RandomNumberRight = Ranint(1,10);
       textureRight=Screen('MakeTexture', onScreen, imageRight);
    end
  end
+ 
+ %% resource for insufficient memory error -> https://github.com/Psychtoolbox-3/Psychtoolbox-3/issues/276
+ % ^ says occurs when using multiple screens? Does the virual desktop treat its projection as an extra screen?
 %draw fixation cross 
 Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
 Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);

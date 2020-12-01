@@ -48,10 +48,10 @@ destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+5
 
 %fID = fopen('ExperimentResults.txt', 'w'); % creates new text file titled ExperimentResults
 % to write to ExperimentResults = fprint(fID, '%s\t%s\t%d\n')
-D.time =
-D.race = 
-D.correct = 
-D.trialNumber = 
+%D.time =
+%D.race = 
+%D.correct = 
+%D.trialNumber = 
 
 %% Fixation cross
 screenWidth   = screenRect(3)-screenRect(1); % width of screen = right-left
@@ -126,27 +126,26 @@ RandomNumberRight = Ranint(1,10);
        % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
-       else if loopOrderFolder(1)==2;
-         imageLeft = imread(b(RandomNumberLeft).name);
-         imageRight = imread(c(RandomNumberRight).name);
+   elseif loopOrderFolder(1)==2;
+       imageLeft = imread(b(RandomNumberLeft).name);
+       imageRight = imread(c(RandomNumberRight).name);
          % Make texture
-         textureLeft=Screen('MakeTexture', onScreen, imageLeft);
-         textureRight=Screen('MakeTexture', onScreen, imageRight);
-       else if loopOrderFolder(1)==3;
-         imageLeft = imread(c(RandomNumberLeft).name);
-         imageRight = imread(b(RandomNumberRight).name);
+       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
+       textureRight=Screen('MakeTexture', onScreen, imageRight);
+   elseif loopOrderFolder(1)==3;
+       imageLeft = imread(c(RandomNumberLeft).name);
+       imageRight = imread(b(RandomNumberRight).name);
          % Make texture
-         textureLeft=Screen('MakeTexture', onScreen, imageLeft);
-         textureRight=Screen('MakeTexture', onScreen, imageRight);
-           else
-        imageLeft = imread(d(RandomNumberLeft).name);
-        imageRight = imread(a(RandomNumberRight).name);
+       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
+       textureRight=Screen('MakeTexture', onScreen, imageRight);
+   elseif loopOrderFolder(1)==4;
+      imageLeft = imread(d(RandomNumberLeft).name);
+      imageRight = imread(a(RandomNumberRight).name);
         % Make texture
-        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
-        textureRight=Screen('MakeTexture', onScreen, imageRight);
-           end
-           end
-    end
+      textureLeft=Screen('MakeTexture', onScreen, imageLeft);
+      textureRight=Screen('MakeTexture', onScreen, imageRight);
+   end
+ end
 %draw fixation cross 
 Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
 Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);

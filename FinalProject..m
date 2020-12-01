@@ -93,56 +93,7 @@ end
 pause (2);
 
 %% Run trials 
-% see displayRSVP_record from lab 4 for writing to data file in data set.
-for i=1: NumTrials 
-% randomize the matrix "Folder"
-loopOrderFolder = randperm(length(Folder));
-% randomize the matrix "Image"
-loopOrderImage = randperm(length(WhiteUnarmed.name)); 
 
-    % Left Image 
-    for j=1:NumTrials
-        % Randomly select image from folder (loopOrderFolder(1))
-        RandomNumberLeft = randi([1:length(Folder),1)]);
-        FolderLeft = Folder(loopOrderFolder(1));
-        RandomImageLeft = FolderLeft(RandomNumberLeft).name;
-        % Make texture
-        textureLeft = Screen(‘MakeTexture’, onScreen, RandomImageLeft);
-        %draw texture loopOrderImage(1) to left side of screen
-        Screen(‘DrawTexture’, onScreen, loopOrderImage(1), destinationRect1);
-    end
-    
-    % Right Image
-    for k=1:NumTrials
-        RandomNumberRight = randi([1:length(loopOrderFolder),1)]);
-        FolderRight = Folder(loopOrderFolder(1));
-        RandomImageRight = FolderRight(RandomNumberRight).name;
-        if loopOrderFolder(1) = 1
-            DirectoryRight = Folder(4);  % can also put WNW
-            % Make texture
-            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
-            % then draw texture (loopOrderImage(2)) from folder 4 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
-        if loopOrderFolder(1) = 2
-            DirectoryRight = Folder(3); % can also put WW
-            % Make texture
-            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
-            % then draw texture (loopOrderImage(2)) from folder 3 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
-        if loopOrderFolder(1) = 3
-            DirectoryRight = Folder(2); % can also put BNW
-            % Make texture
-            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
-            % then draw texture (loopOrderImage(2)) from folder 2 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
-        if loopOrderFolder(1) = 4
-            DirectoryRight = Folder(1); % can also put BW
-            % Make texture
-            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
-            % then draw texture (loopOrderImage(2)) from folder 1 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
-        end
-    end
     
   % establish a method for determining whether the weapon was on the left or right
   

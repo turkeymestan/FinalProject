@@ -34,13 +34,34 @@ D.race =
 D.correct = 
 D.trialNumber = 
 
-%% Set up directories/matrix for folders
+%% Fixation cross
+screenWidth   = screenRect(3)-screenRect(1); % width of screen = right-left
+screenHeight  = screenRect(4)-screenRect(2); % height of screen = bottom-top (remember, top of screen is 0)
+
+screenCenterX = screenWidth/2; % center of screen is half of screen width
+screenCenterY = screenHeight/2; % center of screen is half of screen height
+
+fixation.color = [0 0 0]; % make it black
+fixation.size = 12;
+fixation.penWidth = 4;
+
+% horizontal line
+fromH1 = screenCenterX-fixation.size;
+fromV1 = screenCenterY;
+toH1   = screenCenterX+fixation.size;
+toV1   = screenCenterY;
+
+% vertical line
+fromH2 = screenCenterX;
+fromV2 = screenCenterY-fixation.size;
+toH2   = screenCenterX;
+toV2   = screenCenterY+fixation.size;
 
 % Create directories for folders
-a = dir(fullfile('BlackArmed')); % folder 1 black & gun
-b = dir(fullfile('BlackUnarmed')); % folder 2 black & no gun
-c = dir(fullfile('WhiteArmed')); % folder 3 white & gun
-d = dir(fullfile('WhiteUnarmed')); % folder 4 white & no gun
+a = dir(fullfile('BlackArmed/*.jpg')); % folder 1 black & gun
+b = dir(fullfile('BlackUnarmed/*.jpg')); % folder 2 black & no gun
+c = dir(fullfile('WhiteArmed/*.jpg')); % folder 3 white & gun
+d = dir(fullfile('WhiteUnarmed/*.jpg')); % folder 4 white & no gun
 
 %% Record subject ID
 IDstring = 'Please enter your first and last name into the dialog box.  \n Press space to exit this screen.';
@@ -53,7 +74,6 @@ Screen('Flip', onScreen);
 while ~any(keyCode(KbName('space')))
     [keyIsDown,secs,keyCode]=KbCheck();
     if any(keyCode(KbName('space')))
-         Screen('CloseAll');  
     end  
 end % wait for a keypress
 
@@ -71,8 +91,8 @@ T = struct2table(D)
 Screen('FillRect', onScreen, [255 255 255]); 
 
 %% Present instructions and wait for key press
-InstructTrial = A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon. Press any key to continue.; 
-Screen('TextSize', onScreen ,[50]);
+InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the cue points to a weapon.\nPress the <J> key if the cue does not point towards a weapon.\nPress the space  key to continue.'; 
+Screen('TextSize', onScreen ,30 );
 DrawFormattedText(onScreen, InstructTrial,[centerX-450],[centerY],[textColor]);
 Screen('Flip', onScreen);
 
@@ -81,12 +101,28 @@ Screen('Flip', onScreen);
 while ~any(keyCode(KbName('space')))
     [keyIsDown,secs,keyCode]=KbCheck();
     if any(keyCode(KbName('space')))
-         Screen('CloseAll');  
     end  
 end 
 
-%% Pause
-pause (2);
+InstructTrial = 'The session will begin in...';
+DrawFormattedText(onScreen, InstructTrial,centerX-50,centerY,textColor);
+Screen('Flip', onScreen);
+pause (1.5);
+
+InstructTrial = '3';
+DrawFormattedText(onScreen, InstructTrial,centerX,centerY,textColor);
+Screen('Flip', onScreen);
+pause(1);
+
+InstructTrial = '2';
+DrawFormattedText(onScreen, InstructTrial,centerX,centerY,textColor);
+Screen('Flip', onScreen);
+pause(1);
+
+InstructTrial = '1';
+DrawFormattedText(onScreen, InstructTrial,centerX,centerY,textColor);
+Screen('Flip', onScreen);
+pause (1);   
 
 %% Run trials 
 % see displayRSVP_record from lab 4 for writing to data file in data set.
@@ -122,9 +158,14 @@ RandomNumberRight = Ranint(1,10);
            end
            end
     end
+%draw fixation cross 
+Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
+Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
 %draw textures to left and right sides of screen
-Screen('DrawTexture', onScreen, textureLeft, destinationRect1)
-Screen('DrawTexture', onScreen, textureRight, destinationRect2)
+Screen('DrawTexture', onScreen, textureLeft, [],destinationRect1)
+Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)
+Screen('Flip', onScreen);
+pause(2);% pause for 2 seconds
 end
   % establish a method for determining whether the weapon was on the left or right
   
@@ -151,8 +192,19 @@ end
 % Pause 1 second
 pause (1)
 
-% close main screen 
-Screen('CloseAll'); 
+InstructTrial = 'This is the end of the session. Press space to exit.'; 
+Screen('TextSize', onScreen ,50);
+DrawFormattedText(onScreen, InstructTrial,centerX-450,centerY,textColor);
+Screen('Flip', onScreen);
+
+[keyIsDown,secs,keyCode]=KbCheck();  
+ 
+while ~any(keyCode(KbName('space')))
+    [keyIsDown,secs,keyCode]=KbCheck();
+    if any(keyCode(KbName('space')))
+         Screen('CloseAll');  
+    end  
+end 
 
 % save your D struct in a .mat file in the DataFiles folder  
 % generate a figure for display 

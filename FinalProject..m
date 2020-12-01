@@ -198,20 +198,19 @@ end
   
   % wait for a response (keyboard input) 
   [keyIsDown,keyTime,keyCode] = KbCheck; 
-  if keyIsDown==1;
+  while keyIsDown==1;
     whichKeys = find(keyCode==1);
     if keyCode == 70 &  % label for weapon is left
-        % save correct to struct
+        d.correct = 1
     else if keyCode == 70 &  % label for weapon is right
-        % save incorrect to struct
+         d.correct = 0
     else if keyCode == 74 &  % label for weapon is right
-        % save correct to struct
+         d.correct = 1
     else if keyCode == 74 &  % label for weapon is left
-        % save incorrect to struct
+         d.correct = 0 
     end
   end
-  
-end 
+
 
 % Pause 1 second
 pause (1)

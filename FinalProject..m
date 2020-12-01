@@ -170,6 +170,26 @@ Screen('DrawTexture', onScreen, textureLeft, [],destinationRect1)
 Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)
 Screen('Flip', onScreen);
 pause(2);% pause for 2 seconds
+tic
+    while ~any(keyCode(KbName('space')))
+        [keyIsDown,secs,keyCode]=KbCheck();
+         if any(keyCode(KbName('f')))
+            duration = toc*1000;
+            if Gun == 'left';
+                GunCorrect = 1;
+            else
+                GunCorrect = 0;
+            end
+         else if any(keyCode(KbName('j')))
+            duration = toc*1000; 
+            if Gun == 'right';
+                GunCorrect = 1';
+            else
+                GunCorrect = 0;
+            end
+         end
+         end
+    end
 end
   % establish a method for determining whether the weapon was on the left or right
   

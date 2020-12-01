@@ -77,10 +77,10 @@ toH2   = screenCenterX;
 toV2   = screenCenterY+fixation.size;
 
 %% Create directories for folders
-a = dir(fullfile('BlackArmed/*.jpg')); % folder 1 black & gun
-b = dir(fullfile('BlackUnarmed/*.jpg')); % folder 2 black & no gun
-c = dir(fullfile('WhiteArmed/*.jpg')); % folder 3 white & gun
-d = dir(fullfile('WhiteUnarmed/*.jpg')); % folder 4 white & no gun
+a = dir(fullfile('ExperimentPhotos/BlackArmed/*.jpg')); % folder 1 black & gun
+b = dir(fullfile('ExperimentPhotos/BlackUnarmed/*.jpg')); % folder 2 black & no gun
+c = dir(fullfile('ExperimentPhotos/WhiteArmed/*.jpg')); % folder 3 white & gun
+d = dir(fullfile('ExperimentPhotos/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
 
 %% Present instructions and wait for key press
 InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the cue points to a weapon.\nPress the <J> key if the cue does not point towards a weapon.\nPress the space  key to continue.'; 

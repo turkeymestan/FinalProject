@@ -16,11 +16,11 @@ NumTrials = 50; % number of trials
 
 dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folder, where there will be two other folders (1) Armed Files (2) Unarmed Files  
 
-% the “f” key is key number 70 
-% the “j” key is key number 74 
+% the f key is key number 70 
+% the j key is key number 74 
 
-centerX = screenRect(3)/2; % center ‘X’ coordinate 
-centerY = screenRect(4)/2; % center ‘Y’ coordinate 
+centerX = screenRect(3)/2; % center X coordinate 
+centerY = screenRect(4)/2; % center Y coordinate 
 
 destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
@@ -37,16 +37,11 @@ D.trialNumber =
 %% Set up directories/matrix for folders
 
 % Create directories for folders
-BW = dir(./ExperimentPhotos/BlackArmed/*.jpg')); % folder 1 black & gun
-BNW = dir(./ExperimentPhotos/BlackUnarmed/*.jpg')); % folder 2 black & no gun
-WW = dir(./ExperimentPhotos/WhiteArmed/*.jpg')); % folder 3 white & gun
-WNW = dir(./ExperimentPhotos/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
+a = dir(fullfile('BlackArmed')); % folder 1 black & gun
+b = dir(fullfile('BlackUnarmed')); % folder 2 black & no gun
+c = dir(fullfile('WhiteArmed')); % folder 3 white & gun
+d = dir(fullfile('WhiteUnarmed')); % folder 4 white & no gun
 
-% Create matrix for folders
-Folder = {'BW'; 'BNW'; 'WW'; 'WNW'};
-
-%% Create matrix for images
-Image = 1:length(NumImages); %NumImages = number of images in each folder (must be the same for all folders)
 %% Record subject ID
 IDstring = 'Please enter your first and last name into the dialog box.  \n Press space to exit this screen.';
 Screen('TextSize', onScreen, [50]);
@@ -74,8 +69,9 @@ T = struct2table(D)
 
 [onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
 Screen('FillRect', onScreen, [255 255 255]); 
+
 %% Present instructions and wait for key press
-InstructTrial = ‘A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon. Press any key to continue.’; 
+InstructTrial = A cue will first appear. You will then see two images appear. Press the <F> key if the cue points to a weapon. Press the <J> key if the cue does not point towards a weapon. Press any key to continue.; 
 Screen('TextSize', onScreen ,[50]);
 DrawFormattedText(onScreen, InstructTrial,[centerX-450],[centerY],[textColor]);
 Screen('Flip', onScreen);
@@ -96,58 +92,44 @@ pause (2);
 % see displayRSVP_record from lab 4 for writing to data file in data set.
 for i=1: NumTrials 
 % randomize the matrix "Folder"
-loopOrderFolder = randperm(length(Folder));
-% randomize the matrix "Image"
-loopOrderImage = randperm(length(WhiteUnarmed.name)); 
-
-    % Left Image 
-    for j=1:NumTrials
-        % Randomly select image from folder (loopOrderFolder(1))
-        RandomNumberLeft = randi([1:length(Folder),1)]);
-        FolderLeft = Folder(loopOrderFolder(1));
-        RandomImageLeft = FolderLeft(RandomNumberLeft).name;
+loopOrderFolder = randperm(4);
+RandomNumberLeft = Ranint(1,10);
+RandomNumberRight = Ranint(1,10);
+    if loopOrderFolder(1)==1;
+       imageLeft = imread(a(RandomNumberLeft).name);
+       imageRight = imread(d(RandomNumberRight).name);
+       % Make texture
+       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
+       textureRight=Screen('MakeTexture', onScreen, imageRight);
+       else if loopOrderFolder(1)==2;
+         imageLeft = imread(b(RandomNumberLeft).name);
+         imageRight = imread(c(RandomNumberRight).name);
+         % Make texture
+         textureLeft=Screen('MakeTexture', onScreen, imageLeft);
+         textureRight=Screen('MakeTexture', onScreen, imageRight);
+       else if loopOrderFolder(1)==3;
+         imageLeft = imread(c(RandomNumberLeft).name);
+         imageRight = imread(b(RandomNumberRight).name);
+         % Make texture
+         textureLeft=Screen('MakeTexture', onScreen, imageLeft);
+         textureRight=Screen('MakeTexture', onScreen, imageRight);
+           else
+        imageLeft = imread(d(RandomNumberLeft).name);
+        imageRight = imread(a(RandomNumberRight).name);
         % Make texture
-        textureLeft = Screen(‘MakeTexture’, onScreen, RandomImageLeft);
-        %draw texture loopOrderImage(1) to left side of screen
-        Screen(‘DrawTexture’, onScreen, loopOrderImage(1), destinationRect1);
+        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
+        textureRight=Screen('MakeTexture', onScreen, imageRight);
+           end
+           end
     end
-    
-    % Right Image
-    for k=1:NumTrials
-        RandomNumberRight = randi([1:length(loopOrderFolder),1)]);
-        FolderRight = Folder(loopOrderFolder(1));
-        RandomImageRight = FolderRight(RandomNumberRight).name;
-        if loopOrderFolder(1) = 1
-            DirectoryRight = Folder(4);  % can also put WNW
-            % Make texture
-            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
-            % then draw texture (loopOrderImage(2)) from folder 4 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
-        if loopOrderFolder(1) = 2
-            DirectoryRight = Folder(3); % can also put WW
-            % Make texture
-            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
-            % then draw texture (loopOrderImage(2)) from folder 3 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
-        if loopOrderFolder(1) = 3
-            DirectoryRight = Folder(2); % can also put BNW
-            % Make texture
-            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
-            % then draw texture (loopOrderImage(2)) from folder 2 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
-        if loopOrderFolder(1) = 4
-            DirectoryRight = Folder(1); % can also put BW
-            % Make texture
-            textureRight =Screen(‘MakeTexture’, onScreen, Image(loopOrderImage(2)));
-            % then draw texture (loopOrderImage(2)) from folder 1 to right side of screen
-            Screen(‘DrawTexture’, onScreen, texture, destinationRect2);
-        end
-    end
-    
+%draw textures to left and right sides of screen
+Screen('DrawTexture', onScreen, textureLeft, destinationRect1)
+Screen('DrawTexture', onScreen, textureRight, destinationRect2)
+end
   % establish a method for determining whether the weapon was on the left or right
   
-% the “f” key is key number 70 
-% the “j” key is key number 74 
+% the f key is key number 70 
+% the j key is key number 74 
   
   % wait for a response (keyboard input) 
   [keyIsDown,keyTime,keyCode] = KbCheck; 

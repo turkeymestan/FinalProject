@@ -10,14 +10,15 @@ Screen('Preference', 'SkipSyncTests', 1);
 [onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
 Screen('FillRect', onScreen, [255 255 255]);        % paints screen black (on the offscreen buffer) 
 
-%% Record subject ID
+% formatting text for drawing 
 centerX = screenRect(3)/2;
 centerY = screenRect(4)/2; % need these two statements for the text to write in the correct location.
+textColor = [0 150 80];
 IDstring = 'Please enter your first and last name into the dialog box.  \n Press space to exit this screen.';
 Screen('TextSize', onScreen, 50);
 DrawFormattedText(onScreen, IDstring, [centerX-550], centerY, textColor);
 Screen('Flip', onScreen); 
-
+%% Record subject ID
 [keyIsDown,secs,keyCode]=KbCheck(); 
  
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

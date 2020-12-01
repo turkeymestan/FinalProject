@@ -189,8 +189,6 @@ tic
             else
                 GunCorrect = 0;
             end
-         end
-         end
     end
 end
   % establish a method for determining whether the weapon was on the left or right

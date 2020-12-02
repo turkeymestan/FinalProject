@@ -20,11 +20,11 @@ clc;
 % F and J key presses
 
 %% Output list
-% D.subID
-% D.time
-% D.race ; 1 (black) d.race = 0 (white)
-% D.correct
-% D.cueAndGun
+% D.subID; subject ID
+% D.time ; reaction time
+% D.race ; race of model with gun; 1 = black,  0 = white
+% D.correct ; Whether the study participant correctly identified the side with the gun ; 1 = yes, 0 = no
+% D.cueAndGun; Whether the cue and gun were on the same side of the screen ;  1 = yes, 0 = no
 % D.trialNumber <loopcounter??>
 
 %% recording user input (before psychtoolbox window opens)
@@ -88,7 +88,7 @@ c = dir(fullfile('ExperimentPhotos/WhiteArmed/*.jpg')); % folder 3 white & gun
 d = dir(fullfile('ExperimentPhotos/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
 
 %% Present instructions and wait for key press
-InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the cue is on the side of the weapon.\nPress the <J> key if the cue is not on the side of the weapon.\nPress the space  key to continue.'; 
+InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the cue points to a weapon.\nPress the <J> key if the cue does not point towards a weapon.\nPress the space  key to continue.'; 
 Screen('TextSize', onScreen ,30 );
 DrawFormattedText(onScreen, InstructTrial,centerX-450,centerY,textColor);
 Screen('Flip', onScreen);

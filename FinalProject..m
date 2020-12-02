@@ -189,17 +189,16 @@ RandomNumberRight = Ranint(1,10);
     while t==1;
         [keyIsDown,secs,keyCode]=KbCheck();
         D(i).cueAndGun = strcmp(Gun,CuePosition);
-        tf = strcmp(Gun,'left');
          if any(keyCode(KbName('f')))
             D(i).time = toc*1000;
-            if tf == 1;
+            if Gun == 'left';
                 D(i).correct = 1;
             else
                 D(i).correct = 0;
             end
          else if any(keyCode(KbName('j')))
             D(i).time = toc*1000; 
-            if tf == 0;
+            if Gun == 'right'
                D(i).correct = 1;
             else
                 D(i).correct = 0;

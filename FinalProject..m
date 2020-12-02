@@ -165,10 +165,10 @@ RandomNumberRight = Ranint(1,10);
     %draw cue
     Cue = Ranint(1,2);
     if Cue == 1
-        Screen('FillOval', onScreen, [255 0 0], [centerX-255 centerY-5 centerX-245 centerY+5], 40);
+        Screen('FillOval', onScreen, [255 0 0], [centerX-185 centerY-5 centerX-175 centerY+5], 40);
         CuePosition = 1;
     else
-        Screen('FillOval', onScreen, [255 0 0], [centerX+245 centerY-5 centerX+255 centerY+5], 40 );
+        Screen('FillOval', onScreen, [255 0 0], [centerX+175 centerY-5 centerX+185 centerY+5], 40 );
         CuePosition = 0;
     end
     % Draw Circle On Main Screen

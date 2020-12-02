@@ -119,7 +119,7 @@ pause (1);
 %% Run trials 
 
 for i=1: NumTrials 
-D(i).trialNumber = i;
+D(i).trialNumber = {i};
 %subID repeats for all trials
 D(i).subID = cellstr(name);
 % randomize the matrix "Folder"

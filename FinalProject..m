@@ -63,21 +63,21 @@ screenHeight  = screenRect(4)-screenRect(2); % height of screen = bottom-top (re
 screenCenterX = screenWidth/2; % center of screen is half of screen width
 screenCenterY = screenHeight/2; % center of screen is half of screen height
 
-fixation.color = [0 0 0]; % make it black
-fixation.size = 12;
-fixation.penWidth = 4;
+fixation.color = [0 0 0]; % black
+fixation.length = 10;
+fixation.width = 4;
 
 % horizontal line
-fromH1 = screenCenterX-fixation.size;
+fromH1 = screenCenterX-fixation.length;
 fromV1 = screenCenterY;
-toH1   = screenCenterX+fixation.size;
+toH1   = screenCenterX+fixation.length;
 toV1   = screenCenterY;
 
 % vertical line
 fromH2 = screenCenterX;
-fromV2 = screenCenterY-fixation.size;
+fromV2 = screenCenterY-fixation.length;
 toH2   = screenCenterX;
-toV2   = screenCenterY+fixation.size;
+toV2   = screenCenterY+fixation.length;
 
 % Create directories for folders
 a = dir(fullfile('ExperimentPhotos/BlackArmed/*.jpg')); % folder 1 black & gun
@@ -122,8 +122,8 @@ for i=1: NumTrials
 D(i).trialNumber = {i};
 %subID repeats for all trials
 D(i).subID = cellstr(name);
-Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
-Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
+Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.width);
+Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.width);
 Screen('Flip', onScreen);
 pause(0.75);
 % randomize the matrix "Folder"
@@ -164,8 +164,8 @@ RandomNumberRight = Ranint(1,10);
       textureRight=Screen('MakeTexture', onScreen, imageRight);
     end
     %draw fixation cross 
-    Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
-    Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
+    Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.width);
+    Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.width);
     %draw cue
     Cue = Ranint(1,2);
     if Cue == 1
@@ -179,8 +179,8 @@ RandomNumberRight = Ranint(1,10);
     Screen('Flip', onScreen);
     pause(.45);
     %draw fixation cross  
-    Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
-    Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
+    Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.width);
+    Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.width);
     %draw textures to left and right sides of screen
     Screen('DrawTexture', onScreen, textureLeft, [],destinationRect1)
     Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)

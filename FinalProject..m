@@ -134,7 +134,7 @@ RandomNumberRight = Ranint(1,10);
        imageLeft = imread(a(RandomNumberLeft).name);
        imageRight = imread(d(RandomNumberRight).name);
        Gun = 1;
-       D(i).race = {'B'}; 
+       D(i).race = {1}; %black
        % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
@@ -142,7 +142,7 @@ RandomNumberRight = Ranint(1,10);
        imageLeft = imread(b(RandomNumberLeft).name);
        imageRight = imread(c(RandomNumberRight).name);
        Gun = 0;
-       D(i).race = {'W'};
+       D(i).race = {2}; %white
          % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
@@ -150,7 +150,7 @@ RandomNumberRight = Ranint(1,10);
        imageLeft = imread(c(RandomNumberLeft).name);
        imageRight = imread(b(RandomNumberRight).name);
        Gun = 1;
-       D(i).race = {'W'};
+       D(i).race = {2};
          % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
@@ -158,7 +158,7 @@ RandomNumberRight = Ranint(1,10);
       imageLeft = imread(d(RandomNumberLeft).name);
       imageRight = imread(a(RandomNumberRight).name);
       Gun = 0;
-      D(i).race = {'B'};
+      D(i).race = {1};
         % Make texture
       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
       textureRight=Screen('MakeTexture', onScreen, imageRight);
@@ -242,6 +242,11 @@ uitable('Data',T{:,:},'ColumnName',T.Properties.VariableNames,...
 for k = 1:NumTrials
     timeMeanData(k) = cell2mat(D(k).time)
     correctMeanData(k) = cell2mat(D(k).correct)
+    raceMeanData(k) = cell2mat(D(k).race)
 end
 MeanTime = mean(timeMeanData)
 MeanCorrect = mean(correctMeanData)
+
+% Plot time vs race; 1 = black, 2 = white
+figure(2)
+scatter(raceMeanData,timeMeanData, axis([0 3 350 900])) 

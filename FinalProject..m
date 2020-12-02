@@ -188,7 +188,7 @@ RandomNumberRight = Ranint(1,10);
     % Is the participant correct in which person has the gun?   
     while t==1;
         [keyIsDown,secs,keyCode]=KbCheck();
-        D(i).cueAndGun = strcmp(Gun,Cue);
+        D(i).cueAndGun = strcmp(Gun,CuePosition);
         tf = strcmp(Gun,'left');
          if any(keyCode(KbName('f')))
             D(i).time = toc*1000;
@@ -200,7 +200,7 @@ RandomNumberRight = Ranint(1,10);
          else if any(keyCode(KbName('j')))
             D(i).time = toc*1000; 
             if tf == 0;
-               D(i).correct = 1';
+               D(i).correct = 1;
             else
                 D(i).correct = 0;
             end

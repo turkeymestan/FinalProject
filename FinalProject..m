@@ -28,11 +28,11 @@ clc;
 % D.trialNumber <loopcounter??>
 
 %% recording user input (before psychtoolbox window opens)
-prompt = {'Enter first name:','Enter last name:'}; % these lines create a dialog box for subject ID input.
+prompt = {'Enter first name:'}; % these lines create a dialog box for subject ID input.
 dlgtitle = 'Subject ID';
 dims = [1 35];
-definput = {'First', 'Last'};
-D.subID =  inputdlg(prompt,dlgtitle,dims,definput);
+definput = {'First'};
+name =  inputdlg(prompt,dlgtitle,dims,definput);
 
 %% Open the main screen 
 Screen('Preference','ConserveVRAM',64); 
@@ -121,6 +121,8 @@ pause (1);
 %% Run trials 
 
 for i=1: NumTrials 
+%subID repeats for all trials
+D(i).subID = name
 % randomize the matrix "Folder"
 loopOrderFolder = randperm(4);
 RandomNumberLeft = Ranint(1,10);

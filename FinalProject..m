@@ -13,7 +13,7 @@ clear all;
 clc; 
 
 %% Input list
-% First and Last Name
+% First Name
 % Space presses
 % F and J key presses
 

@@ -197,7 +197,7 @@ Screen('Flip', onScreen);
 pause(2);% pause for 2 seconds
 tic
 % Is the participant correct in which person has the gun?   
-    while ~any(keyCode%%%%%%%%%%%%%%))
+    while ~any(keyCode==keyIsDown))
         [keyIsDown,secs,keyCode]=KbCheck();
          if any(keyCode(KbName('f')))
             duration = toc*1000;
@@ -218,7 +218,7 @@ tic
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end
 % Is the cue on the same side as the gun?
-    while ~any(keyCode%%%%%%%%)
+    while ~any(keyCode==keyIsDown)
         [keyIsDown,secs,keyCode]=KbCheck();
          if any(keyCode(KbName('f')))
             duration = toc*1000;

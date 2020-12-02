@@ -1,19 +1,3 @@
-%%%%%% I dont think we need this anymore but we can keep it for now incase we need it. 
-%%%%%% It includes a struct input we may need.
-  % wait for a response (keyboard input) 
- % [keyIsDown,keyTime,keyCode] = KbCheck; 
-  %while keyIsDown==1;
-   % whichKeys = find(keyCode==1);
-    %if keyCode == 70 &  % label for weapon is left
-     %   d.correct = 1
-    %else if keyCode == 70 &  % label for weapon is right
-     %    d.correct = 0
-    %else if keyCode == 74 &  % label for weapon is right
-     %    d.correct = 1
-    %else if keyCode == 74 &  % label for weapon is left
-     %    d.correct = 0 
-    %end
-  %end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Goal of Script
 % Final project We are attempting to code a behavioral experiment 
@@ -169,18 +153,12 @@ RandomNumberRight = Ranint(1,10);
         % Make texture
       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
       textureRight=Screen('MakeTexture', onScreen, imageRight);
-   end
- end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- %% resource for insufficient memory error -> https://github.com/Psychtoolbox-3/Psychtoolbox-3/issues/276
- % ^ says occurs when using multiple screens? Does the virual desktop treat its projection as an extra screen?
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%draw fixation cross 
-Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
-Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
-%-----------------------------------------------------------------------------------------------------------------
-%draw cue
-Cue = Ranint(1,2);
+    end
+    %draw fixation cross 
+    Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
+    Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
+    %draw cue
+    Cue = Ranint(1,2);
     if Cue == 1
         Screen('FillOval', onScreen, [0 0 0], [centerX-255 centerY-5 centerX-245 centerY+5], 40);
         CuePosition = 'left';
@@ -188,61 +166,46 @@ Cue = Ranint(1,2);
         Screen('FillOval', onScreen, [0 0 0], [centerX+245 centerY-5 centerX+255 centerY+5], 40);
         CuePosition = 'right';
     end
-        % Draw Circle On Main Screen
-Screen('Flip', onScreen);
-pause(.2);
-%draw fixation cross  
-Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
-Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
-%draw textures to left and right sides of screen
-Screen('DrawTexture', onScreen, textureLeft, [],destinationRect1)
-Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)
-Screen('Flip', onScreen);
-pause(2);% pause for 2 seconds
-tic
-% Is the participant correct in which person has the gun?   
-    while ~any(keyCode==keyIsDown))
-        [keyIsDown,secs,keyCode]=KbCheck();
-         if any(keyCode(KbName('f')))
-            duration = toc*1000;
-            if Gun == 'left';
-                GunCorrect = 1;
-            else
-                GunCorrect = 0;
-            end
-         else if any(keyCode(KbName('j')))
-            duration = toc*1000; 
-            if Gun == 'right';
-                GunCorrect = 1';
-            else
-                GunCorrect = 0;
-            end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Add whether the cue was on the same side as the gun
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    end
-% Is the cue on the same side as the gun?
+    % Draw Circle On Main Screen
+    Screen('Flip', onScreen);
+    pause(.2);
+    %draw fixation cross  
+    Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
+    Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
+    %draw textures to left and right sides of screen
+    Screen('DrawTexture', onScreen, textureLeft, [],destinationRect1)
+    Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)
+    Screen('Flip', onScreen);
+    pause(2);% pause for 2 seconds
+    tic
+    % Is the participant correct in which person has the gun?   
     while ~any(keyCode==keyIsDown)
         [keyIsDown,secs,keyCode]=KbCheck();
+        tf = strcmp(Gun,'left');
          if any(keyCode(KbName('f')))
             duration = toc*1000;
-            if Gun == 'left';
+            if tf == 1;
                 GunCorrect = 1;
             else
                 GunCorrect = 0;
             end
          else if any(keyCode(KbName('j')))
             duration = toc*1000; 
-            if Gun == 'right';
+            if tf == 0;
                 GunCorrect = 1';
             else
                 GunCorrect = 0;
             end
-     end
+             end
+         end
+    end
+ 
+    % Is the cue on the same side as the gun?
+    while ~any(keyCode==keyIsDown)
+        [keyIsDown,secs,keyCode]=KbCheck();
+        GunCueSame = strcmp(Gun,Cue); % variable (1 = same, 0 = not)
+    end
 end
-  
-% the f key is key number 70 
-% the j key is key number 74 
 
 % Pause 1 second
 pause (1)

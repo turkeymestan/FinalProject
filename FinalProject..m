@@ -1,4 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Goal of Script
 % Final project We are attempting to code a behavioral experiment 
 % using a posner cueing paradigm. A cue will be presented, pointing 
@@ -8,7 +7,6 @@
 % and must press the 'j' key if the gun is on the right side of the screen. 
 % Reaction time as a function of accuracy will be studied, and we will 
 % attempt to determine if the cueing had any effect on the accuracy/reaction time.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Clear
 clear all; 

@@ -237,3 +237,11 @@ save('ExperimentPhotos/structdata.mat','D')
 T = struct2table(D);
 uitable('Data',T{:,:},'ColumnName',T.Properties.VariableNames,...
     'RowName',T.Properties.RowNames,'Units', 'Normalized', 'Position',[0, 0, 1, 1]); 
+
+% find mean response time and proportion correct
+for k = 1:NumTrials
+    timeMeanData(k) = cell2mat(D(k).time)
+    correctMeanData(k) = cell2mat(D(k).correct)
+end
+MeanTime = mean(timeMeanData)
+MeanCorrect = mean(correctMeanData)

@@ -193,7 +193,7 @@ RandomNumberRight = Ranint(1,10);
     % Is the participant correct in which person has the gun?   
     while ~any(keyIsDown) == 1;
         [keyIsDown,secs,keyCode]=KbCheck();
-         if any(keyIsDown) == 1; %%%%% work on corresponding the f key to the correct signal 
+         if any(keyCode(KbName('f')))
             D(i).time = toc*1000;
             if Gun == 1;
                 D(i).correct = 1;

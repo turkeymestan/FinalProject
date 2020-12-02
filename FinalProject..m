@@ -95,11 +95,8 @@ while ~any(keyCode(KbName('space')))
     [keyIsDown,secs,keyCode]=KbCheck();
 end 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Make sure this is centered
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 InstructTrial = 'The session will begin in...';
-DrawFormattedText(onScreen, InstructTrial,centerX-100,centerY,textColor);
+DrawFormattedText(onScreen, InstructTrial,centerX-300,centerY,textColor);
 Screen('Flip', onScreen);
 pause (1.5);
 

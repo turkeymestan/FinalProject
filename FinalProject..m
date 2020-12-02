@@ -249,4 +249,4 @@ MeanCorrect = mean(correctMeanData)
 
 % Plot time vs race; 1 = black, 2 = white
 figure(2)
-scatter(raceMeanData,timeMeanData, axis([0 3 350 900])) 
+scatter(raceMeanData,timeMeanData) 

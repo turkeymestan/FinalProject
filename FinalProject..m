@@ -202,6 +202,7 @@ RandomNumberRight = Ranint(1,10);
             end
              end
          end
+         t=t+1;
     end
 end
 

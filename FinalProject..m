@@ -131,7 +131,7 @@ RandomNumberRight = Ranint(1,10);
     if loopOrderFolder(1)==1;
        imageLeft = imread(a(RandomNumberLeft).name);
        imageRight = imread(d(RandomNumberRight).name);
-       Gun = 'left';
+       Gun = '1;
        D(i).race = {'Black'}; % have to do it this jank way so that the # of rows match in the table
        % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
@@ -139,7 +139,7 @@ RandomNumberRight = Ranint(1,10);
    elseif loopOrderFolder(1)==2;
        imageLeft = imread(b(RandomNumberLeft).name);
        imageRight = imread(c(RandomNumberRight).name);
-       Gun = 'right';
+       Gun = 0;
        D(i).race = {'White'};
          % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
@@ -147,7 +147,7 @@ RandomNumberRight = Ranint(1,10);
    elseif loopOrderFolder(1)==3;
        imageLeft = imread(c(RandomNumberLeft).name);
        imageRight = imread(b(RandomNumberRight).name);
-       Gun = 'left';
+       Gun = 1;
        D(i).race = {'White'};
          % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
@@ -155,7 +155,7 @@ RandomNumberRight = Ranint(1,10);
    elseif loopOrderFolder(1)==4;
       imageLeft = imread(d(RandomNumberLeft).name);
       imageRight = imread(a(RandomNumberRight).name);
-      Gun = 'right';
+      Gun = 0;
       D(i).race = {'Black'};
         % Make texture
       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
@@ -168,10 +168,10 @@ RandomNumberRight = Ranint(1,10);
     Cue = Ranint(1,2);
     if Cue == 1
         Screen('FillOval', onScreen, [255 0 0], [centerX-255 centerY-5 centerX-245 centerY+5], 40);
-        CuePosition = 'left';
+        CuePosition = 1;
     else
         Screen('FillOval', onScreen, [255 0 0], [centerX+245 centerY-5 centerX+255 centerY+5], 40 );
-        CuePosition = 'right';
+        CuePosition = 0;
     end
     % Draw Circle On Main Screen
     Screen('Flip', onScreen);
@@ -188,17 +188,21 @@ RandomNumberRight = Ranint(1,10);
     % Is the participant correct in which person has the gun?   
     while t==1;
         [keyIsDown,secs,keyCode]=KbCheck();
-        D(i).cueAndGun = strcmp(Gun,CuePosition);
+        if Gun == Cue Position;
+            D(i).cueAndGun = 1;
+        else
+            D(i).cueAndGun = 0;
+        end
          if any(keyCode(KbName('f')))
             D(i).time = toc*1000;
-            if Gun == 'left';
+            if Gun == 1;
                 D(i).correct = 1;
             else
                 D(i).correct = 0;
             end
          else if any(keyCode(KbName('j')))
             D(i).time = toc*1000; 
-            if Gun == 'right'
+            if Gun == 0;
                D(i).correct = 1;
             else
                 D(i).correct = 0;

@@ -249,4 +249,7 @@ MeanCorrect = mean(correctMeanData)
 
 % Plot time vs race; 1 = black, 2 = white
 figure(2)
-scatter(raceMeanData,timeMeanData) 
+scatter(raceMeanData,timeMeanData, 'filled') 
+title('Race vs Reaction Time')
+xlabel('Race (1-Black, 2-White')
+ylabel('Reaction Time (ms)')

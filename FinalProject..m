@@ -182,9 +182,9 @@ RandomNumberRight = Ranint(1,10);
     Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)
     [keyIsDown,secs,keyCode]=KbCheck();
     if Gun == CuePosition;
-            D(i).cueAndGun = 1;
+            D(i).cueAndGun = {1};
         else
-            D(i).cueAndGun = 0;
+            D(i).cueAndGun = {0};
     end
     Screen('Flip', onScreen);
     tic

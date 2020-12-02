@@ -131,7 +131,7 @@ RandomNumberRight = Ranint(1,10);
     if loopOrderFolder(1)==1;
        imageLeft = imread(a(RandomNumberLeft).name);
        imageRight = imread(d(RandomNumberRight).name);
-       Gun = '1;
+       Gun = 1;
        D(i).race = {'Black'}; % have to do it this jank way so that the # of rows match in the table
        % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);

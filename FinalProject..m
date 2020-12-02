@@ -177,7 +177,7 @@ RandomNumberRight = Ranint(1,10);
     end
     % Draw Circle On Main Screen
     Screen('Flip', onScreen);
-    pause(.35);
+    pause(.45);
     %draw fixation cross  
     Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
     Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);

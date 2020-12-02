@@ -122,6 +122,10 @@ for i=1: NumTrials
 D(i).trialNumber = {i};
 %subID repeats for all trials
 D(i).subID = cellstr(name);
+Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
+Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
+Screen('Flip', onScreen);
+pause(0.75);
 % randomize the matrix "Folder"
 loopOrderFolder = randperm(4);
 RandomNumberLeft = Ranint(1,10);
@@ -208,10 +212,6 @@ RandomNumberRight = Ranint(1,10);
              end
          end
     end
-    Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
-    Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
-    Screen('Flip', onScreen);
-    pause(0.75);
 end
 
 % Pause 1 second

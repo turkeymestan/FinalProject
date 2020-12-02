@@ -123,7 +123,7 @@ pause (1);
 for i=1: NumTrials 
 t=1;
 %subID repeats for all trials
-D(i).subID = name
+D(i).subID = name;
 % randomize the matrix "Folder"
 loopOrderFolder = randperm(4);
 RandomNumberLeft = Ranint(1,10);

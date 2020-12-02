@@ -183,16 +183,16 @@ RandomNumberRight = Ranint(1,10);
     Screen('DrawTexture', onScreen, textureLeft, [],destinationRect1)
     Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)
     [keyIsDown,secs,keyCode]=KbCheck();
+    if Gun == CuePosition;
+            D(i).cueAndGun = 1;
+        else
+            D(i).cueAndGun = 0;
+    end
     Screen('Flip', onScreen);
     tic
     % Is the participant correct in which person has the gun?   
     while ~any(keyIsDown) == 1;
         [keyIsDown,secs,keyCode]=KbCheck();
-        if Gun == CuePosition;
-            D(i).cueAndGun = 1;
-        else
-            D(i).cueAndGun = 0;
-        end
          if any(keyIsDown) == 1; %%%%% work on corresponding the f key to the correct signal 
             D(i).time = toc*1000;
             if Gun == 1;

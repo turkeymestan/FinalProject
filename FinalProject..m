@@ -182,8 +182,8 @@ RandomNumberRight = Ranint(1,10);
     %draw textures to left and right sides of screen
     Screen('DrawTexture', onScreen, textureLeft, [],destinationRect1)
     Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)
+    [keyIsDown,secs,keyCode]=KbCheck();
     Screen('Flip', onScreen);
-    pause(2);% pause for 2 seconds
     tic
     % Is the participant correct in which person has the gun?   
     while t==1;

@@ -35,7 +35,7 @@ prompt = {'Enter first name:','Enter last name:'}; % these lines create a dialog
 dlgtitle = 'Subject ID';
 dims = [1 35];
 definput = {'First', 'Last'};
-answer = input (prompt,dlgtitle,dims,definput);
+answer = inputdlg(prompt,dlgtitle,dims,definput);
 
 D.subID = answer; 
 %% Open the main screen 

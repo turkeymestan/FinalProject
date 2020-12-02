@@ -131,28 +131,32 @@ RandomNumberRight = Ranint(1,10);
     if loopOrderFolder(1)==1;
        imageLeft = imread(a(RandomNumberLeft).name);
        imageRight = imread(d(RandomNumberRight).name);
-       D(i).race = {'Black';'Target'}; % have to do it this jank way so that the # of rows match in the table
+       Gun = 'left';
+       D(i).race = {'Black'}; % have to do it this jank way so that the # of rows match in the table
        % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
    elseif loopOrderFolder(1)==2;
        imageLeft = imread(b(RandomNumberLeft).name);
        imageRight = imread(c(RandomNumberRight).name);
-       D(i).race = {'White';'Target'};
+       Gun = 'right';
+       D(i).race = {'White'};
          % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
    elseif loopOrderFolder(1)==3;
        imageLeft = imread(c(RandomNumberLeft).name);
        imageRight = imread(b(RandomNumberRight).name);
-       D(i).race = {'White';'Target'};
+       Gun = 'left';
+       D(i).race = {'White'};
          % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
    elseif loopOrderFolder(1)==4;
       imageLeft = imread(d(RandomNumberLeft).name);
       imageRight = imread(a(RandomNumberRight).name);
-      D(i).race = {'Black';'Target'};
+      Gun = 'right';
+      D(i).race = {'Black'};
         % Make texture
       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
       textureRight=Screen('MakeTexture', onScreen, imageRight);

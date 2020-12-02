@@ -23,7 +23,7 @@ clc;
 % D.race ; race of model with gun; 1 = black,  0 = white
 % D.correct ; Whether the study participant correctly identified the side with the gun ; 1 = yes, 0 = no
 % D.cueAndGun; Whether the cue and gun were on the same side of the screen ;  1 = yes, 0 = no
-% D.trialNumber <loopcounter??>
+% D.trialNumber 
 
 %% recording user input (before psychtoolbox window opens)
 prompt = {'Enter first name:'}; % these lines create a dialog box for subject ID input.
@@ -119,7 +119,7 @@ pause (1);
 %% Run trials 
 
 for i=1: NumTrials 
-t=1;
+D(i).trialNumber = i;
 %subID repeats for all trials
 D(i).subID = cellstr(name);
 % randomize the matrix "Folder"

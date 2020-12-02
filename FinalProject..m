@@ -38,28 +38,17 @@ definput = {'First', 'Last'};
 answer = input (prompt,dlgtitle,dims,definput);
 
 D.subID = answer; 
-%save('ExperimentResults.txt','D.subID');
-
 %% Open the main screen 
 Screen('Preference','ConserveVRAM',64); 
 Screen('Preference', 'SkipSyncTests', 1); 
 [onScreen, screenRect] = Screen('OpenWindow',0);    % opens the mainscreen 
 Screen('FillRect', onScreen, [255 255 255]);        % paints screen (on the offscreen buffer) 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Create Struct
-T = struct2table(D)
-%%%% Does this need to be moved before the first variable is introduced?
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %% Define Variables 
 
 NumTrials = 50; % number of trials  
 
-dir('ExperimentPhotos/*.jpg'); % sets current directory to ExperimentFiles folder, where there will be two other folders (1) Armed Files (2) Unarmed Files  
-
-% the f key is key number 70 
-% the j key is key number 74 
+dir('ExperimentPhotos/*.jpg'); % set directory 
 
 % formatting text for drawing 
 centerX = screenRect(3)/2; % center X coordinate 
@@ -74,13 +63,12 @@ destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-5
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% What is happening with these??
-%fID = fopen('ExperimentResults.txt', 'w'); % creates new text file titled ExperimentResults
-% to write to ExperimentResults = fprint(fID, '%s\t%s\t%d\n')
+%%%%%%%% What is happening with these?? <--- i think we need to define d.time in the for loop using 'tik' and 'tok'. 
+% same thing for d.race, d.race = 1 (black) d.race = 0 (white)
 %D.time =
 %D.race = 
 %D.correct = 
-%D.trialNumber = 
+%D.trialNumber = <loopcounter??>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Fixation cross varibles
@@ -191,6 +179,7 @@ RandomNumberRight = Ranint(1,10);
 %draw fixation cross 
 Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
 Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
+%-----------------------------------------------------------------------------------------------------------------
 %draw cue
 Cue = Ranint(1,2);
     if Cue == 1

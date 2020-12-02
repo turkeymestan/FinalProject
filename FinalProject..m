@@ -9,8 +9,6 @@
 % Reaction time as a function of accuracy will be studied, and we will 
 % attempt to determine if the cueing had any effect on the accuracy/reaction time.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Clear all
 clear all; 
 clc; 
 
@@ -87,7 +85,7 @@ d = dir(fullfile('ExperimentPhotos/WhiteUnarmed/*.jpg')); % folder 4 white & no 
 % Make sure this is centered
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Present instructions and wait for key press
-InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the cue is on the side of the weapon.\nPress the <J> key if the cue does is not on the side of the weapon.\nPress the space  key to continue.'; 
+InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the cue points to a weapon.\nPress the <J> key if the cue does not point towards a weapon.\nPress the space  key to continue.'; 
 Screen('TextSize', onScreen ,30 );
 DrawFormattedText(onScreen, InstructTrial,centerX-450,centerY,textColor);
 Screen('Flip', onScreen);
@@ -163,7 +161,7 @@ RandomNumberRight = Ranint(1,10);
         Screen('FillOval', onScreen, [255 0 0], [centerX-255 centerY-5 centerX-245 centerY+5], 40);
         CuePosition = 'left';
     else
-        Screen('FillOval', onScreen, [255 0 0], [centerX+245 centerY-5 centerX+255 centerY+5], 40);
+        Screen('FillOval', onScreen, [255 0 0], [centerX+245 centerY-5 centerX+255 centerY+5], 40 );
         CuePosition = 'right';
     end
     % Draw Circle On Main Screen
@@ -227,9 +225,8 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%% These need to be done:
 % save your D struct in a .mat file in the DataFiles folder  
-save('DataFiles/structdata.mat','D')
+save('ExperimentPhotos/structdata.mat','D') 
 % generate a figure for display 
 T = struct2table(D);
 uitable('Data',T{:,:},'ColumnName',T.Properties.VariableNames,...
-    'RowName',T.Properties.RowNames,'Units', 'Normalized', 'Position',[0, 0, 1, 1]);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    'RowName',T.Properties.RowNames,'Units', 'Normalized', 'Position',[0, 0, 1, 1]); 

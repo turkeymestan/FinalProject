@@ -60,24 +60,24 @@ destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+5
 screenWidth   = screenRect(3)-screenRect(1); % width of screen = right-left
 screenHeight  = screenRect(4)-screenRect(2); % height of screen = bottom-top (remember, top of screen is 0)
 
-screenCenterX = screenWidth/2; % center of screen is half of screen width
-screenCenterY = screenHeight/2; % center of screen is half of screen height
+screenCenterX = screenWidth/2; % center = half screen width
+screenCenterY = screenHeight/2; % center = half screen height
 
 fixation.color = [0 0 0]; % black
 fixation.length = 10;
 fixation.width = 4;
 
 % horizontal line
-fromH1 = screenCenterX-fixation.length;
-fromV1 = screenCenterY;
-toH1   = screenCenterX+fixation.length;
-toV1   = screenCenterY;
+fmH1 = screenCenterX-fixation.length;
+fmV1 = screenCenterY;
+tH1   = screenCenterX+fixation.length;
+tV1   = screenCenterY;
 
 % vertical line
-fromH2 = screenCenterX;
-fromV2 = screenCenterY-fixation.length;
-toH2   = screenCenterX;
-toV2   = screenCenterY+fixation.length;
+fmH2 = screenCenterX;
+fmV2 = screenCenterY-fixation.length;
+tH2   = screenCenterX;
+tV2   = screenCenterY+fixation.length;
 
 % Create directories for folders
 a = dir(fullfile('ExperimentPhotos/BlackArmed/*.jpg')); % folder 1 black & gun
@@ -122,8 +122,8 @@ for i=1: NumTrials
 D(i).trialNumber = {i};
 %subID repeats for all trials
 D(i).subID = cellstr(name);
-Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.width);
-Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.width);
+Screen('DrawLine', onScreen, fixation.color, fmH1, fmV1, tH1, tV1, fixation.width);
+Screen('DrawLine', onScreen, fixation.color, fmH2, fmV2, tH2, tV2, fixation.width);
 Screen('Flip', onScreen);
 pause(0.75);
 % randomize the matrix "Folder"
@@ -164,8 +164,8 @@ RandomNumberRight = Ranint(1,10);
       textureRight=Screen('MakeTexture', onScreen, imageRight);
     end
     %draw fixation cross 
-    Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.width);
-    Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.width);
+    Screen('DrawLine', onScreen, fixation.color, fmH1, fmV1, tH1, tV1, fixation.width);
+    Screen('DrawLine', onScreen, fixation.color, fmH2, fmV2, tH2, tV2, fixation.width);
     %draw cue
     Cue = Ranint(1,2);
     if Cue == 1

@@ -121,7 +121,7 @@ pause (1);
 for i=1: NumTrials 
 t=1;
 %subID repeats for all trials
-D(i).subID = name;
+D(i).subID = cellstr(name);
 % randomize the matrix "Folder"
 loopOrderFolder = randperm(4);
 RandomNumberLeft = Ranint(1,10);
@@ -130,7 +130,7 @@ RandomNumberRight = Ranint(1,10);
        imageLeft = imread(a(RandomNumberLeft).name);
        imageRight = imread(d(RandomNumberRight).name);
        Gun = 1;
-       D(i).race = {'Black'}; % have to do it this jank way so that the # of rows match in the table
+       D(i).race = {'B'}; 
        % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
@@ -138,7 +138,7 @@ RandomNumberRight = Ranint(1,10);
        imageLeft = imread(b(RandomNumberLeft).name);
        imageRight = imread(c(RandomNumberRight).name);
        Gun = 0;
-       D(i).race = {'White'};
+       D(i).race = {'W'};
          % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
@@ -146,7 +146,7 @@ RandomNumberRight = Ranint(1,10);
        imageLeft = imread(c(RandomNumberLeft).name);
        imageRight = imread(b(RandomNumberRight).name);
        Gun = 1;
-       D(i).race = {'White'};
+       D(i).race = {'W'};
          % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
@@ -154,7 +154,7 @@ RandomNumberRight = Ranint(1,10);
       imageLeft = imread(d(RandomNumberLeft).name);
       imageRight = imread(a(RandomNumberRight).name);
       Gun = 0;
-      D(i).race = {'Black'};
+      D(i).race = {'B'};
         % Make texture
       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
       textureRight=Screen('MakeTexture', onScreen, imageRight);
@@ -192,18 +192,18 @@ RandomNumberRight = Ranint(1,10);
     while ~any(keyIsDown) == 1;
         [keyIsDown,secs,keyCode]=KbCheck();
          if any(keyCode(KbName('f')))
-            D(i).time = toc*1000;
+            D(i).time = {toc*1000};
             if Gun == 1;
-                D(i).correct = 1;
+                D(i).correct = {1};
             else
-                D(i).correct = 0;
+                D(i).correct = {0};
             end
          else if any(keyCode(KbName('j')))
-            D(i).time = toc*1000; 
+            D(i).time = {toc*1000}; 
             if Gun == 0;
-               D(i).correct = 1;
+               D(i).correct = {1};
             else
-                D(i).correct = 0;
+                D(i).correct = {0};
             end
              end
          end

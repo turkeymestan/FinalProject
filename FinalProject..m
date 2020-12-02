@@ -4,13 +4,26 @@
 % using a posner cueing paradigm. A cue will be presented, pointing 
 % to one side of the visual field. Two images will then be presented, 
 % one of a subject with a gun, the other a subject without a gun. The 
-% test subject must press the 'F' key if the cue points towards the gun, 
-% and must press the 'j' key if the cue does not point towards the gun. 
+% test subject must press the 'F' key if the gun is on the left side, 
+% and must press the 'j' key if the gun is on the right side of the screen. 
 % Reaction time as a function of accuracy will be studied, and we will 
 % attempt to determine if the cueing had any effect on the accuracy/reaction time.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Clear
 clear all; 
 clc; 
+
+%% Input list
+% First and Last Name
+% Space presses
+% F and J key presses
+
+%% Output list
+%D.time
+%D.race ; 1 (black) d.race = 0 (white)
+%D.correct
+%D.trialNumber <loopcounter??>
 
 %% recording user input (before psychtoolbox window opens)
 prompt = {'Enter first name:','Enter last name:'}; % these lines create a dialog box for subject ID input.
@@ -43,15 +56,6 @@ displayHeight = 400;
 destinationRect1 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX-500, centerY);
 destinationRect2 = CenterRectOnPoint([0 0 displayWidth displayHeight], centerX+500, centerY);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% What is happening with these?? <--- i think we need to define d.time in the for loop using 'tik' and 'tok'. 
-% same thing for d.race, d.race = 1 (black) d.race = 0 (white)
-%D.time =
-%D.race = 
-%D.correct = 
-%D.trialNumber = <loopcounter??>
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % Fixation cross varibles
 screenWidth   = screenRect(3)-screenRect(1); % width of screen = right-left
 screenHeight  = screenRect(4)-screenRect(2); % height of screen = bottom-top (remember, top of screen is 0)
@@ -81,9 +85,6 @@ b = dir(fullfile('ExperimentPhotos/BlackUnarmed/*.jpg')); % folder 2 black & no 
 c = dir(fullfile('ExperimentPhotos/WhiteArmed/*.jpg')); % folder 3 white & gun
 d = dir(fullfile('ExperimentPhotos/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Make sure this is centered
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Present instructions and wait for key press
 InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the cue points to a weapon.\nPress the <J> key if the cue does not point towards a weapon.\nPress the space  key to continue.'; 
 Screen('TextSize', onScreen ,30 );
@@ -116,9 +117,7 @@ Screen('Flip', onScreen);
 pause (1);   
 
 %% Run trials 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% see displayRSVP_record from lab 4 for writing to data file in data set.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 for i=1: NumTrials 
 % randomize the matrix "Folder"
 loopOrderFolder = randperm(4);

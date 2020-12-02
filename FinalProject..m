@@ -35,6 +35,7 @@ dir('ExperimentPhotos/*.jpg'); % set directory
 centerX = screenRect(3)/2; % center X coordinate 
 centerY = screenRect(4)/2; % center Y coordinate 
 textColor = [0 150 80];
+
 % texture parameters 
 displayWidth = 400; % these two variables essential for drawing our textures, do not remove without warning. 
 displayHeight = 400;

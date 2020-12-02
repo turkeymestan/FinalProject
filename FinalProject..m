@@ -178,10 +178,10 @@ Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixatio
 %draw cue
 Cue = Ranint(1,2);
     if Cue == 1
-        Screen('FillOval', onScreen, [255 0 0], [centerX-255 centerY-5 centerX-245 centerY+5], [40]);
+        Screen('FillOval', onScreen, [0 0 0], [centerX-255 centerY-5 centerX-245 centerY+5], 40);
         CuePosition = 'left';
     else
-        Screen('FillOval', onScreen, [255 0 0], [centerX+245 centerY-5 centerX+255 centerY+5], [40]);
+        Screen('FillOval', onScreen, [0 0 0], [centerX+245 centerY-5 centerX+255 centerY+5], 40);
         CuePosition = 'right';
     end
         % Draw Circle On Main Screen
@@ -196,7 +196,8 @@ Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)
 Screen('Flip', onScreen);
 pause(2);% pause for 2 seconds
 tic
-    while ~any(keyCode(KbName('space')))
+% Is the participant correct in which person has the gun?   
+    while ~any(keyCode%%%%%%%%%%%%%%))
         [keyIsDown,secs,keyCode]=KbCheck();
          if any(keyCode(KbName('f')))
             duration = toc*1000;
@@ -216,6 +217,24 @@ tic
 % Add whether the cue was on the same side as the gun
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     end
+% Is the cue on the same side as the gun?
+    while ~any(keyCode%%%%%%%%)
+        [keyIsDown,secs,keyCode]=KbCheck();
+         if any(keyCode(KbName('f')))
+            duration = toc*1000;
+            if Gun == 'left';
+                GunCorrect = 1;
+            else
+                GunCorrect = 0;
+            end
+         else if any(keyCode(KbName('j')))
+            duration = toc*1000; 
+            if Gun == 'right';
+                GunCorrect = 1';
+            else
+                GunCorrect = 0;
+            end
+     end
 end
   
 % the f key is key number 70 

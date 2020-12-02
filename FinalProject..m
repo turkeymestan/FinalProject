@@ -130,24 +130,28 @@ RandomNumberRight = Ranint(1,10);
     if loopOrderFolder(1)==1;
        imageLeft = imread(a(RandomNumberLeft).name);
        imageRight = imread(d(RandomNumberRight).name);
+       D.race = {'White';'Target'}; % have to do it this jank way so that the # of rows match in the table
        % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
    elseif loopOrderFolder(1)==2;
        imageLeft = imread(b(RandomNumberLeft).name);
        imageRight = imread(c(RandomNumberRight).name);
+       D.race = {'White';'Target'};
          % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
    elseif loopOrderFolder(1)==3;
        imageLeft = imread(c(RandomNumberLeft).name);
        imageRight = imread(b(RandomNumberRight).name);
+       D.race = {'Black';'Target'};
          % Make texture
        textureLeft=Screen('MakeTexture', onScreen, imageLeft);
        textureRight=Screen('MakeTexture', onScreen, imageRight);
    elseif loopOrderFolder(1)==4;
       imageLeft = imread(d(RandomNumberLeft).name);
       imageRight = imread(a(RandomNumberRight).name);
+      D.race = {'Black';'Target'};
         % Make texture
       textureLeft=Screen('MakeTexture', onScreen, imageLeft);
       textureRight=Screen('MakeTexture', onScreen, imageRight);

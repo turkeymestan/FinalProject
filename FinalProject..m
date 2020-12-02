@@ -20,10 +20,12 @@ clc;
 % F and J key presses
 
 %% Output list
-%D.time
-%D.race ; 1 (black) d.race = 0 (white)
-%D.correct
-%D.trialNumber <loopcounter??>
+% D.subID
+% D.time
+% D.race ; 1 (black) d.race = 0 (white)
+% D.correct
+% D.cueAndGun
+% D.trialNumber <loopcounter??>
 
 %% recording user input (before psychtoolbox window opens)
 prompt = {'Enter first name:','Enter last name:'}; % these lines create a dialog box for subject ID input.
@@ -181,18 +183,18 @@ RandomNumberRight = Ranint(1,10);
         [keyIsDown,secs,keyCode]=KbCheck();
         tf = strcmp(Gun,'left');
          if any(keyCode(KbName('f')))
-            duration = toc*1000;
+            D(i).time = toc*1000;
             if tf == 1;
-                GunCorrect = 1;
+                D(i).correct = 1;
             else
-                GunCorrect = 0;
+                D(i).correct = 0;
             end
          else if any(keyCode(KbName('j')))
-            duration = toc*1000; 
+            D(i).time = toc*1000; 
             if tf == 0;
-                GunCorrect = 1';
+               D(i).correct = 1';
             else
-                GunCorrect = 0;
+                D(i).correct = 0;
             end
              end
          end
@@ -201,7 +203,7 @@ RandomNumberRight = Ranint(1,10);
     % Is the cue on the same side as the gun?
     while ~any(keyCode==keyIsDown)
         [keyIsDown,secs,keyCode]=KbCheck();
-        GunCueSame = strcmp(Gun,Cue); % variable (1 = same, 0 = not)
+        D(i).cueAndGun = strcmp(Gun,Cue); % variable (1 = same, 0 = not)
     end
 end
 

@@ -1,3 +1,19 @@
+%%%%%% I dont think we need this anymore but we can keep it for now incase we need it. 
+%%%%%% It includes a struct input we may need.
+  % wait for a response (keyboard input) 
+ % [keyIsDown,keyTime,keyCode] = KbCheck; 
+  %while keyIsDown==1;
+   % whichKeys = find(keyCode==1);
+    %if keyCode == 70 &  % label for weapon is left
+     %   d.correct = 1
+    %else if keyCode == 70 &  % label for weapon is right
+     %    d.correct = 0
+    %else if keyCode == 74 &  % label for weapon is right
+     %    d.correct = 1
+    %else if keyCode == 74 &  % label for weapon is left
+     %    d.correct = 0 
+    %end
+  %end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Goal of Script
 % Final project We are attempting to code a behavioral experiment 

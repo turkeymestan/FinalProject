@@ -240,9 +240,9 @@ uitable('Data',T{:,:},'ColumnName',T.Properties.VariableNames,...
 
 % find mean response time and proportion correct
 for k = 1:NumTrials
-    timeMeanData(k) = cell2mat(D(k).time)
-    correctMeanData(k) = cell2mat(D(k).correct)
-    raceMeanData(k) = cell2mat(D(k).race)
+    timeMeanData(k) = cell2mat(D(k).time);
+    correctMeanData(k) = cell2mat(D(k).correct);
+    raceMeanData(k) = cell2mat(D(k).race);
 end
 MeanTime = mean(timeMeanData)
 MeanCorrect = mean(correctMeanData)

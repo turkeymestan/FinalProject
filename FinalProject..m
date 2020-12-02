@@ -208,6 +208,11 @@ RandomNumberRight = Ranint(1,10);
              end
          end
     end
+    Screen('FillRect', onScreen, [255 255 255]); 
+    Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.penWidth);
+    Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.penWidth);
+    Screen('Flip', onScreen);
+    pause(0.75);
 end
 
 % Pause 1 second

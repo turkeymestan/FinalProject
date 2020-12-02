@@ -121,6 +121,7 @@ pause (1);
 %% Run trials 
 
 for i=1: NumTrials 
+t=1;
 %subID repeats for all trials
 D(i).subID = name
 % randomize the matrix "Folder"
@@ -181,8 +182,9 @@ RandomNumberRight = Ranint(1,10);
     pause(2);% pause for 2 seconds
     tic
     % Is the participant correct in which person has the gun?   
-    while ~any(keyCode==keyIsDown)
+    while t==1;
         [keyIsDown,secs,keyCode]=KbCheck();
+        D(i).cueAndGun = strcmp(Gun,Cue);
         tf = strcmp(Gun,'left');
          if any(keyCode(KbName('f')))
             D(i).time = toc*1000;
@@ -200,12 +202,6 @@ RandomNumberRight = Ranint(1,10);
             end
              end
          end
-    end
- 
-    % Is the cue on the same side as the gun?
-    while ~any(keyCode==keyIsDown)
-        [keyIsDown,secs,keyCode]=KbCheck();
-        D(i).cueAndGun = strcmp(Gun,Cue); % variable (1 = same, 0 = not)
     end
 end
 

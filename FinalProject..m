@@ -188,7 +188,7 @@ RandomNumberRight = Ranint(1,10);
     % Is the participant correct in which person has the gun?   
     while t==1;
         [keyIsDown,secs,keyCode]=KbCheck();
-        if Gun == Cue Position;
+        if Gun == CuePosition;
             D(i).cueAndGun = 1;
         else
             D(i).cueAndGun = 0;

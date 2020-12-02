@@ -88,7 +88,7 @@ c = dir(fullfile('ExperimentPhotos/WhiteArmed/*.jpg')); % folder 3 white & gun
 d = dir(fullfile('ExperimentPhotos/WhiteUnarmed/*.jpg')); % folder 4 white & no gun
 
 %% Present instructions and wait for key press
-InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the cue points to a weapon.\nPress the <J> key if the cue does not point towards a weapon.\nPress the space  key to continue.'; 
+InstructTrial = 'A cue will first appear.\nYou will then see two images appear.\nPress the <F> key if the weapon is on the left side of the screen.\nPress the <J> key if the weapon is on the right side of the screen.\nPress the space  key to continue.'; 
 Screen('TextSize', onScreen ,30 );
 DrawFormattedText(onScreen, InstructTrial,centerX-450,centerY,textColor);
 Screen('Flip', onScreen);

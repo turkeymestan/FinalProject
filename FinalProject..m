@@ -179,8 +179,8 @@ RandomNumberRight = Ranint(1,10);
     Screen('Flip', onScreen);
     pause(.45);
     %draw fixation cross  
-    Screen('DrawLine', onScreen, fixation.color, fromH1, fromV1, toH1, toV1, fixation.width);
-    Screen('DrawLine', onScreen, fixation.color, fromH2, fromV2, toH2, toV2, fixation.width);
+    Screen('DrawLine', onScreen, fixation.color, fmH1, fmV1, tH1, tV1, fixation.width);
+    Screen('DrawLine', onScreen, fixation.color, fmH2, fmV2, tH2, tV2, fixation.width);
     %draw textures to left and right sides of screen
     Screen('DrawTexture', onScreen, textureLeft, [],destinationRect1)
     Screen('DrawTexture', onScreen, textureRight, [],destinationRect2)

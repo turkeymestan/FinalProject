@@ -231,8 +231,6 @@ while ~any(keyCode(KbName('space')))
     end  
 end 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%% These need to be done:
 % save your D struct in a .mat file in the DataFiles folder  
 save('ExperimentPhotos/structdata.mat','D') 
 % generate a figure for display 

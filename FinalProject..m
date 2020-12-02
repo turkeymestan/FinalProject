@@ -186,14 +186,14 @@ RandomNumberRight = Ranint(1,10);
     Screen('Flip', onScreen);
     tic
     % Is the participant correct in which person has the gun?   
-    while t==1;
+    while ~any(keyIsDown) == 1;
         [keyIsDown,secs,keyCode]=KbCheck();
         if Gun == CuePosition;
             D(i).cueAndGun = 1;
         else
             D(i).cueAndGun = 0;
         end
-         if any(keyCode(KbName('f')))
+         if any(keyIsDown) == 1; %%%%% work on corresponding the f key to the correct signal 
             D(i).time = toc*1000;
             if Gun == 1;
                 D(i).correct = 1;
@@ -209,7 +209,6 @@ RandomNumberRight = Ranint(1,10);
             end
              end
          end
-         t=t+1;
     end
 end
 
